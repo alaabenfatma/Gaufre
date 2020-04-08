@@ -1,3 +1,5 @@
+vscode/
+.git/
 # Reference: https://github.com/github/gitignore
 # From: https://gist.github.com/edesdan/6bb43343740bcd54ef0f56a384a2f66f
 
