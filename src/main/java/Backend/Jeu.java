@@ -8,7 +8,7 @@ public  class Jeu {
     private static boolean[][] gaufre; // le terrain
     private static int longueur;
     private static int largeur;
-    public static Turn tour = Turn.Player1; // faux: player1, vrai: player2
+    private static Turn tour = Turn.Player1; // faux: player1, vrai: player2
 
     public static void init() {
         longueur = 10;
@@ -23,9 +23,9 @@ public  class Jeu {
         }
     }
 
-    public static void init(int longeur, int largeur) {
-        longueur = longeur;
-        largeur = largeur;
+    public static void init(int lon, int larg) {
+        longueur = lon;
+        largeur = larg;
         gaufre = new boolean[longueur][largeur];
         // initialise toutes les cases par true (non occupée)
         for (int i = 0; i < longueur; i++) {
@@ -84,16 +84,16 @@ public  class Jeu {
             System.out.println("");
         }
     }
-    public int longeur(){
-        return this.longueur;
+    public static int longeur(){
+        return Jeu.longueur;
     }
 
     //renvoi la largeur
-    public int largeur(){
+    public static int largeur(){
         return Jeu.largeur;
     }
 
-    public Turn tour(){
+    public static Turn tour(){
         return Jeu.tour;
     }
 

@@ -20,7 +20,7 @@ public class Backend {
         Jeu.affiche();
         while (!perdu) {
             // on lis un coup
-            if (Jeu.tour==Turn.Player1) {
+            if (Jeu.tour()==Turn.Player1) {
                 do {
                     System.out.print("Player 1 : Entrez x et y: ");
                     ligne = myInput.nextLine();
@@ -37,10 +37,9 @@ public class Backend {
                     y_input = Integer.parseInt(ligne_split[1]);
                 } while (!Jeu.isFree(x_input, y_input));
             }
-
             if ((x_input == 0) && (y_input == 0)) {
                 // on a perdu
-                if (Jeu.tour == Turn.Player2) {
+                if (Jeu.tour() == Turn.Player2) {
                     System.out.println("Player 2 a perdu");
                 } else {
                     System.out.println("Player 1 a perdu");
@@ -59,6 +58,4 @@ public class Backend {
         Backend n = new Backend();
         n.joue();
     }
-    //renvoi la longueur
-
 }
