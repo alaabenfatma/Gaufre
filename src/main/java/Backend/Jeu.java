@@ -1,14 +1,11 @@
 package Backend;
 
-enum Turn{
-    Player1,
-    Player2
-}
+
 public  class Jeu {
     private static boolean[][] gaufre; // le terrain
     private static int longueur;
     private static int largeur;
-    private static Turn tour = Turn.Player1; // faux: player1, vrai: player2
+    public static Turn tour = Turn.Player1; // faux: player1, vrai: player2
 
     public static void init() {
         longueur = 10;
@@ -22,7 +19,6 @@ public  class Jeu {
             }
         }
     }
-
 
     public static void init(int _longeur, int _largeur) {
         longueur = _longeur;
@@ -85,14 +81,12 @@ public  class Jeu {
             System.out.println("");
         }
     }
-
-    //renvoi la longueur
-    public static int longueur(){
+    public static int longeur(){
         return Jeu.longueur;
     }
 
     //renvoi la largeur
-    public static int largeur(){
+    public static  int largeur(){
         return Jeu.largeur;
     }
 
@@ -101,7 +95,7 @@ public  class Jeu {
     }
 
     public static boolean[][] terrain(){
-        return Jeu.gaufre;
+        return gaufre;
     }
 
 }

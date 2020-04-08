@@ -10,9 +10,9 @@ public class Ihm implements Runnable {
 		JFrame frame = new JFrame("Gauffre");
 		// Ajout de notre composant de dessin dans la fenetre
 		UI ui = new UI();
-		
-		frame.add(ui);
-		//frame.addMouseListener(new EcouteurDeSouris(j));
+        frame.add(ui);
+        
+        
 		//frame.addKeyListener(new EcouteurKey(j,ng));
 		// Un clic sur le bouton de fermeture clos l'application
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -21,7 +21,9 @@ public class Ihm implements Runnable {
         ui.setVisible(true);
 		frame.setVisible(true);
 		
-		frame.setSize(500,500);
+        frame.setSize(500,500);
+        frame.addMouseListener(new mouseListener(ui));
+        //frame.add(ui.player, BorderLayout.NORTH);
 		/*
 		if (maximized) {
 			device.setFullScreenWindow(null);

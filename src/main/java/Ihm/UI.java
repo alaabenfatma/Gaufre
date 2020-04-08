@@ -10,6 +10,7 @@ import java.io.*;
 public class UI extends JComponent {
     Image gauffre;
     Image poison;
+    public JLabel player = new JLabel("Player X");
 
     public UI() {
         try {
@@ -30,6 +31,7 @@ public class UI extends JComponent {
 		int height = getSize().height;
 		drawable.clearRect(0, 0, width, height);
     }
+    public Dimension cellSize;
     public void paintComponent(Graphics g) {
         clear();
         Dimension d = this.getSize();
@@ -40,13 +42,12 @@ public class UI extends JComponent {
         int x = 0, y = 0;
         int w = d.width / Jeu.largeur();
         int h = d.height / Jeu.longeur();
+        cellSize = new Dimension(w,h);
         System.out.println(h + " " + w);
         Graphics2D drawable = (Graphics2D) g;
         try {
             for (int i = 0; i < Jeu.longeur(); i++) {
                 x = 0;
-                System.out.printf("Drawn %d times\n",counter++);
-
                 for (int j = 0; j < Jeu.largeur(); j++) {
                     if(i==0 && j==0){
                         drawable.drawImage(poison, x, y, w, h, null);
@@ -54,8 +55,9 @@ public class UI extends JComponent {
                     else if (Jeu.terrain()[i][j] == true) {
                         drawable.drawImage(gauffre, x, y, w, h, null);
                     } else if (Jeu.terrain()[i][j] == false) {
+                        drawable.setColor(Color.WHITE);
+                        drawable.setBackground(Color.WHITE);
                         drawable.drawRect( x, y, w, h);
-                        drawable.setColor(Color.RED);
                         
                     }
                     x += w;
@@ -63,7 +65,8 @@ public class UI extends JComponent {
                 }
                 y += h;
             }
-
+            drawable.setColor(Color.black);
+            drawable.drawString(player.getText(), x-(w/2), y);
         } catch (Exception e) {
             // TODO: handle exception
         }
