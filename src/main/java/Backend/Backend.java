@@ -81,6 +81,8 @@ public class Backend {
     public void joue() {
         boolean perdu = false;
         Scanner myInput = new Scanner(System.in);
+        String ligne;
+        String [] ligne_split;
         int x_input;
         int y_input;
         affiche();
@@ -88,17 +90,19 @@ public class Backend {
             // on lis un coup
             if (!tour) {
                 do {
-                    System.out.print("Player 1 -- Entrez x : ");
-                    x_input = myInput.nextInt();
-                    System.out.print("Player 1 -- Entrez y : ");
-                    y_input = myInput.nextInt();
+                    System.out.print("Player 1 -- Entrez x et y: ");
+                    ligne = myInput.nextLine();
+                    ligne_split=ligne.split(" ");
+                    x_input = Integer.parseInt(ligne_split[0]);
+                    y_input = Integer.parseInt(ligne_split[1]);
                 } while (!isFree(x_input, y_input));
             } else {
                 do {
-                    System.out.print("Player 2 -- Entrez x : ");
-                    x_input = myInput.nextInt();
-                    System.out.print("Player 2 -- Entrez y : ");
-                    y_input = myInput.nextInt();
+                    System.out.print("Player 2 -- Entrez x et y: ");
+                    ligne = myInput.nextLine();
+                    ligne_split=ligne.split(" ");
+                    x_input = Integer.parseInt(ligne_split[0]);
+                    y_input = Integer.parseInt(ligne_split[1]);
                 } while (!isFree(x_input, y_input));
             }
 
@@ -112,7 +116,6 @@ public class Backend {
                 perdu = true;
             } else {
                 occupe(x_input, y_input);
-                affiche();
             }
 
         }
