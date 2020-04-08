@@ -73,12 +73,12 @@ public  class Jeu {
 
     // affiche la gaufre
     public static void affiche() {
-        for (int i = 0; i < longueur; i++) {
+        for (int i =0; i < longueur; i++) {
             for (int j = 0; j < largeur; j++) {
                 if (Jeu.isFree(j, i)) {
-                    System.out.print("O");
+                    System.out.print("-");
                 } else {
-                    System.out.print("K");
+                    System.out.print(" ");
                 }
             }
             System.out.println("");

@@ -22,7 +22,7 @@ public class Backend {
             // on lis un coup
             if (Jeu.tour==Turn.Player1) {
                 do {
-                    System.out.print("Player 1 -- Entrez x et y: ");
+                    System.out.print("Player 1 : Entrez x et y: ");
                     ligne = myInput.nextLine();
                     ligne_split=ligne.split(" ");
                     x_input = Integer.parseInt(ligne_split[0]);
@@ -30,7 +30,7 @@ public class Backend {
                 } while (!Jeu.isFree(x_input, y_input));
             } else {
                 do {
-                    System.out.print("Player 2 -- Entrez x et y: ");
+                    System.out.print("Player 2 : Entrez x et y: ");
                     ligne = myInput.nextLine();
                     ligne_split=ligne.split(" ");
                     x_input = Integer.parseInt(ligne_split[0]);
