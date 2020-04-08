@@ -1,3 +1,4 @@
+package Ai;
 import java.util.Random;
 
 /*Fonctions a implementer ailleurs
@@ -12,12 +13,12 @@ plateau.jouer(i,j) joue le coup a la case de coordonnée (i,j) et supprime les c
 
 
 public class Ai {
-    Random r;
+  /*  Random r;
 
     boolean IARandom() {
 		int i, j;
         //On choisi aléatoirement une case, puis on regarde si elle est libre(on peux la selectionner)
-		i = r.nextInt(plateau.hauteur());
+		i = r.nextInt(Jeu..hauteur());
         j = r.nextInt(plateau.largeur());
 		while (!plateau.libre(i, j)) {
             //Si elle n'est pas libre on en choisit une autre
@@ -56,5 +57,5 @@ public class Ai {
 		plateau.jouer(i, j);
 		return true;
     }
-    
+    */
 }

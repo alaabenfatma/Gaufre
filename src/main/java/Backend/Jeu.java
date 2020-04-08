@@ -23,9 +23,9 @@ public  class Jeu {
         }
     }
 
-    public static void init(int longeur, int largeur) {
-        longueur = longeur;
-        largeur = largeur;
+    public static void init(int _longeur, int _largeur) {
+        longueur = _longeur;
+        largeur = _largeur;
         gaufre = new boolean[longueur][largeur];
         // initialise toutes les cases par true (non occupée)
         for (int i = 0; i < longueur; i++) {
@@ -84,18 +84,21 @@ public  class Jeu {
             System.out.println("");
         }
     }
-    public int longeur(){
-        return this.longueur;
+    public static int longeur(){
+        return Jeu.longueur;
     }
 
     //renvoi la largeur
-    public int largeur(){
+    public static  int largeur(){
         return Jeu.largeur;
     }
 
-    public Turn tour(){
+    public static Turn tour(){
         return Jeu.tour;
     }
 
+    public static boolean[][] terrain(){
+        return gaufre;
+    }
 
 }
