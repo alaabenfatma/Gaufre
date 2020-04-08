@@ -22,7 +22,8 @@ public class Ihm implements Runnable {
 		frame.setVisible(true);
 		
         frame.setSize(500,500);
-        frame.addMouseListener(new mouseListener(ui));
+		frame.addMouseListener(new mouseListener(ui));
+		frame.addKeyListener(new keyListener());
         //frame.add(ui.player, BorderLayout.NORTH);
 		/*
 		if (maximized) {
@@ -32,13 +33,5 @@ public class Ihm implements Runnable {
 			device.setFullScreenWindow(frame);
 			maximized = true;
 		}*/
-	}
-
-	public static void main(String[] args) {
-		// Swing s'exécute dans un thread séparé. En aucun cas il ne faut accéder directement
-		// aux composants graphiques depuis le thread principal. Swing fournit la méthode
-        // invokeLater pour demander au thread de Swing d'exécuter la méthode run d'un Runnable.
-        Jeu.init(5,5);
-		SwingUtilities.invokeLater(new Ihm ());
 	}
 }

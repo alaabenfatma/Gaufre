@@ -1,12 +1,14 @@
 package Backend;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Scanner;
 
 //Définie les principales règles du jeu
 
 public class Backend {
 
-
+    
     public Backend(){
         
     }

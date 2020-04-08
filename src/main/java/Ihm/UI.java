@@ -18,7 +18,7 @@ public class UI extends JComponent {
             gauffre = ImageIO.read(img);
             img =  UI.class.getResourceAsStream("poison.png");
             poison = ImageIO.read(img);
-            
+            Jeu._ui = this;
         } catch (IOException e) {
             System.out.println(e.toString());
         }

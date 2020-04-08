@@ -32,12 +32,6 @@ public class mouseListener implements MouseListener {
             
         } else {
             Jeu.occupe(i, j);
-            if (Jeu.tour() == Turn.Player2) {
-                
-                _ui.player.setText("Player 2");
-            } else {
-                _ui.player.setText("Player 1");
-            }
         }
         _ui.repaint();
     }
