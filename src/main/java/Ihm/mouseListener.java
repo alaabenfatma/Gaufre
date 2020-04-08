@@ -25,9 +25,9 @@ public class mouseListener implements MouseListener {
         if ((i == 0) && (j == 0)) {
             // on a perdu
             if (Jeu.tour() == Turn.Player2) {
-                System.out.println("Player 2 a perdu");
+                msgBox.MessageBox("Player 2 a perdu","Gameover");
             } else {
-                System.out.println("Player 1 a perdu");
+                msgBox.MessageBox("Player 1 a perdu","Gameover");
             }
             
         } else {
