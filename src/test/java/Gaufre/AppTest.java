@@ -100,7 +100,7 @@ public class AppTest {
         thrownException.expectMessage("Erreur isBusy: y > largeur du terrain");
         Jeu.isFree(x, y);
     }
-    
+
     @Test
     public void testisFree4(){
         Jeu.init();
@@ -130,5 +130,27 @@ public class AppTest {
         Jeu.CTRL_Z();
         assertEquals(Save, Jeu.pile());
     }
+    @Test
+    public void test_joueur_1_CTRL_Z(){
+        Turn joueur;
+        Jeu.init();
+        joueur=Jeu.tour();
+        Jeu.occupe(5,5);
+        Jeu.CTRL_Z();
+        assertEquals(joueur,Jeu.tour());
 
+    }
+    @Test
+    public void test_joueur_2_CTRL_Z(){
+        Turn joueur;
+        Jeu.init();
+        Jeu.occupe(5,5);
+        joueur=Jeu.tour();
+        Jeu.occupe(4, 5);
+        Jeu.occupe(4,3);
+        Jeu.CTRL_Z();
+        Jeu.CTRL_Z();
+        assertEquals(joueur,Jeu.tour());
+
+    }
 }
