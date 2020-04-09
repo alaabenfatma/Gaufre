@@ -41,12 +41,12 @@ public class UI extends JComponent {
         }
         int x = 0, y = 0;
         int w = d.width / Jeu.largeur();
-        int h = d.height / Jeu.longeur();
+        int h = d.height / Jeu.longueur();
         cellSize = new Dimension(w,h);
         System.out.println(h + " " + w);
         Graphics2D drawable = (Graphics2D) g;
         try {
-            for (int i = 0; i < Jeu.longeur(); i++) {
+            for (int i = 0; i < Jeu.longueur(); i++) {
                 x = 0;
                 for (int j = 0; j < Jeu.largeur(); j++) {
                     if(i==0 && j==0){
