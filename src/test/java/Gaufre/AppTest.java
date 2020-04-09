@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import Backend.Jeu;
+import Backend.Turn;
 
 import static org.junit.Assert.*;
 
@@ -65,6 +66,19 @@ public class AppTest {
             }
         }
         assertTrue(test);
+    }
+
+    @Test
+    public void test_joueur_1_init(){
+        Jeu.init();
+        assertEquals(Turn.Player1,Jeu.tour);
+    }
+    
+    @Test
+    public void test_joueur_2_apres_J1(){
+        Jeu.init();
+        Jeu.occupe(5, 5);
+        assertEquals(Turn.Player2,Jeu.tour);
     }
 
 }

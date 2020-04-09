@@ -8,12 +8,13 @@ public class Jeu {
     private static boolean[][] gaufre; // le terrain
     private static int longueur;
     private static int largeur;
-    public static Turn tour = Turn.Player1; // faux: player1, vrai: player2
+    public static Turn tour; // faux: player1, vrai: player2
     private static Stack<boolean[][]> history = new Stack<boolean[][]>();
     public static UI _ui;
     public static void init() {
         longueur = 10;
         largeur = 10;
+        tour = Turn.Player1;
         gaufre = new boolean[longueur][largeur];
 
         // initialise toutes les cases par true (non occupée)
@@ -27,6 +28,7 @@ public class Jeu {
     public static void init(int _longueur, int _largeur) {
         longueur = _longueur;
         largeur = _largeur;
+        tour = Turn.Player1;
         gaufre = new boolean[longueur][largeur];
         // initialise toutes les cases par true (non occupée)
         for (int i = 0; i < longueur; i++) {
