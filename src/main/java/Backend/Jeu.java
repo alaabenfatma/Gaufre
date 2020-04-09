@@ -9,7 +9,7 @@ public class Jeu {
     private static int longueur;
     private static int largeur;
     public static Turn tour; // faux: player1, vrai: player2
-    public static Stack<boolean[][]> history = new Stack<boolean[][]>();
+    private static Stack<boolean[][]> history = new Stack<boolean[][]>();
     public static UI _ui;
     public static void init() {
         longueur = 10;
@@ -147,5 +147,7 @@ public class Jeu {
     public static boolean[][] terrain() {
         return gaufre;
     }
-
+    public static Stack<boolean[][]> pile(){
+        return Jeu.history;
+    }
 }

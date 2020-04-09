@@ -122,10 +122,10 @@ public class AppTest {
         final Stack<boolean[][]> Save;
         Jeu.init();
         Jeu.occupe(5, 5);
-        Save = Jeu.history;
+        Save = Jeu.pile();
         Jeu.occupe(2, 2);
         Jeu.CTRL_Z();
-        assertEquals(Save, Jeu.history);
+        assertEquals(Save, Jeu.pile());
     }
 
 }
