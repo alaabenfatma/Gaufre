@@ -73,9 +73,11 @@ public class Jeu {
                 // tour = !tour; // tour du joueur suivant
                 if (tour == Turn.Player1) {
                     tour = Turn.Player2;
+                    if(_ui!=null)
                     _ui.player.setText("Player 2");
                 } else {
                     tour = Turn.Player1;
+                    if(_ui!=null)
                     _ui.player.setText("Player 1");
                 }
             }
@@ -99,9 +101,11 @@ public class Jeu {
         wentbackintime = true;
         if (tour == Turn.Player1) {
             tour = Turn.Player2;
+            if(_ui!=null)
             _ui.player.setText("Player 2");
         } else {
             tour = Turn.Player1;
+            if(_ui!=null)
             _ui.player.setText("Player 1");
         }
         _ui.repaint();
