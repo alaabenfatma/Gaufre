@@ -57,5 +57,28 @@ public class Ai {
 		plateau.jouer(i, j);
 		return true;
     }
-    */
+
+
+    boolean IAgagnante() {
+        //Version améliorée ++ qui fait les meilleurs coups
+
+        int i, j;
+
+        //Pour que le joueur 1 gagne a tous les coups il doit se retouver avec juste la ligne et la colonne de la case poison
+        if(!plateau.libre(1, 1)){
+            plateau.jouer(1, 1);
+            return true;
+        }
+        for (int i = 1; i < plateau.hauteur(); i++) {
+            if(plateau.libre(0, i) && !plateau.libre(i, 0)){
+                plateau.jouer(i,0);
+                return true;
+            }
+            if(plateau.libre(i, 0) && !plateau.libre(0, i)){
+                plateau.jouer(0,i);
+                return true;
+            }
+        }
+        return false;
+    }*/
 }
