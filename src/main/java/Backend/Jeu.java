@@ -9,7 +9,7 @@ public class Jeu {
     private static int longueur;
     private static int largeur;
     public static Turn tour; // faux: player1, vrai: player2
-    private static Stack<boolean[][]> history = new Stack<boolean[][]>();
+    public static Stack<boolean[][]> history = new Stack<boolean[][]>();
     public static UI _ui;
     public static void init() {
         longueur = 10;
@@ -103,13 +103,18 @@ public class Jeu {
         wentbackintime = true;
         if (tour == Turn.Player1) {
             tour = Turn.Player2;
-            _ui.player.setText("Player 2");
+            if (_ui != null){
+                _ui.player.setText("Player 2");
+            }
         } else {
             tour = Turn.Player1;
-            _ui.player.setText("Player 1");
+            if (_ui != null){
+                _ui.player.setText("Player 1");
+            }
         }
-        _ui.repaint();
-
+        if (_ui != null){
+            _ui.repaint();
+        }
     }
 
     // affiche la gaufre
