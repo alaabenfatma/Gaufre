@@ -36,6 +36,7 @@ public class AppTest {
         Jeu.isFree(x, y);
     }
 
+
     @Test
     public void testisFree3() throws Exception{
         Jeu.init();
@@ -45,7 +46,14 @@ public class AppTest {
         thrownException.expectMessage("Erreur isBusy: y > largeur du terrain");
         Jeu.isFree(x, y);
     }
-
+    @Test
+    public void testisFree4(){
+        Jeu.init();
+        int x=5;
+        int y=5;
+        Jeu.occupe(x, y);
+        assertFalse(Jeu.isFree(x, y));
+    }
     @Test
     public void testinit_tab_all_true(){
         Jeu.init();
