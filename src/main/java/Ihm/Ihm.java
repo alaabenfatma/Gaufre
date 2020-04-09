@@ -15,7 +15,7 @@ public class Ihm implements Runnable {
         
 		//frame.addKeyListener(new EcouteurKey(j,ng));
 		// Un clic sur le bouton de fermeture clos l'application
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 
         // On fixe la taille et on demarre
         ui.setVisible(true);

@@ -3,6 +3,7 @@ package Backend;
 import java.util.*;
 
 import Ihm.UI;
+import Ihm.msgBox;
 
 public class Jeu {
     private static boolean[][] gaufre; // le terrain
@@ -12,6 +13,8 @@ public class Jeu {
     private static Stack<boolean[][]> history = new Stack<boolean[][]>();
     public static UI _ui;
     public static GameLevel mode_IA = GameLevel.Easy;
+    public static GameMode mode_JEU = GameMode.PVP;
+
     public static void init() {
         longueur = 10;
         largeur = 10;
@@ -66,6 +69,16 @@ public class Jeu {
                     saved[i][j] = gaufre[i][j];
                 }
             }
+            if ((x == 0) && (y == 0)) {
+                // on a perdu
+                if (Jeu.tour() == Turn.Player2) {
+                    msgBox.MessageBox("Player 2 a perdu", "Gameover");
+                } else {
+                    msgBox.MessageBox("Player 1 a perdu", "Gameover");
+                }
+                return;
+            }
+            _ui.repaint();
             history.add(saved);
 
             affiche();

@@ -13,7 +13,6 @@ public class mouseListener implements MouseListener {
 
     mouseListener(UI ui) {
         _ui = ui;
-
     }
 
     @Override
@@ -22,18 +21,7 @@ public class mouseListener implements MouseListener {
         i = (int)Math.floor(e.getY() /_ui.cellSize.height);
         j = (int)Math.floor(e.getX() /_ui.cellSize.width);
         System.out.printf("Mouse position : (%d,%d)\nGame position : (%d,%d)\n",e.getX(),e.getY(),i,j);
-        if ((i == 0) && (j == 0)) {
-            // on a perdu
-            if (Jeu.tour() == Turn.Player2) {
-                msgBox.MessageBox("Player 2 a perdu","Gameover");
-            } else {
-                msgBox.MessageBox("Player 1 a perdu","Gameover");
-            }
-            
-        } else {
-            Jeu.occupe(i, j);
-        }
-        _ui.repaint();
+       Jeu.occupe(i, j);
     }
 
     @Override

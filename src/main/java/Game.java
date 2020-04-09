@@ -18,14 +18,32 @@ public class Game implements Runnable {
         twoPlayers.addMouseListener(new MouseAdapter() {
 
             public void mouseClicked(MouseEvent e) {
-                Jeu.init(5, 5);
-                Jeu.init(5, 5);
+                Jeu.init(2,2);
+                Jeu.mode_JEU = GameMode.PVP;
                 SwingUtilities.invokeLater(new Ihm());
             }
 
         });
         JButton playerIA = new JButton("Player vs IA");
+        playerIA.addMouseListener(new MouseAdapter() {
+
+            public void mouseClicked(MouseEvent e) {
+                Jeu.init(5, 5);
+                Jeu.mode_JEU = GameMode.PVA;
+                SwingUtilities.invokeLater(new Ihm());
+            }
+
+        });
         JButton IA_IA = new JButton("IA vs IA");
+        IA_IA.addMouseListener(new MouseAdapter() {
+
+            public void mouseClicked(MouseEvent e) {
+                Jeu.init(5, 5);
+                Jeu.mode_JEU = GameMode.AVA;
+                SwingUtilities.invokeLater(new Ihm());
+            }
+
+        });
         // IA MODE SLIDE
         JSlider ia_Slider = new JSlider( JSlider.HORIZONTAL,0,100,10);
         ia_Slider.setMinorTickSpacing(50);
