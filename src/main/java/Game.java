@@ -1,9 +1,10 @@
 import javax.swing.*;
 
-import Backend.Jeu;
+import Backend.*;
 import Ihm.Ihm;
 
 import java.awt.event.*;
+import java.util.Hashtable;
 import java.awt.*;
 
 public class Game implements Runnable {
@@ -25,11 +26,30 @@ public class Game implements Runnable {
         });
         JButton playerIA = new JButton("Player vs IA");
         JButton IA_IA = new JButton("IA vs IA");
+        // IA MODE SLIDE
+        JSlider ia_Slider = new JSlider( JSlider.HORIZONTAL,0,100,10);
+        ia_Slider.setMinorTickSpacing(50);
+        ia_Slider.setMajorTickSpacing(50);
+        ia_Slider.setPaintTicks(true);
+       
+        Hashtable<Integer, JLabel> levels = new Hashtable<Integer, JLabel>();
+        levels.put(0, new JLabel("Facile"));
+        levels.put(50, new JLabel("Normale"));
+        levels.put(100, new JLabel("Impossible"));
+        ia_Slider.setLabelTable(levels);
+        ia_Slider.setPaintLabels(true);
+        JLabel diff = new JLabel("Niveau d'IA : ");
+        // Set the label to be drawn
+        ia_Slider.setLabelTable(levels);
         panel.add(twoPlayers);
         panel.add(playerIA);
         panel.add(IA_IA);
+        panel.add(diff);
+        panel.add(ia_Slider);
         frame.add(panel);
-        frame.setSize(150, 130);
+
+        frame.setSize(250, 200);
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
         int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);

@@ -11,6 +11,7 @@ public class Jeu {
     public static Turn tour; // faux: player1, vrai: player2
     private static Stack<boolean[][]> history = new Stack<boolean[][]>();
     public static UI _ui;
+    public static GameLevel mode_IA = GameLevel.Easy;
     public static void init() {
         longueur = 10;
         largeur = 10;
@@ -48,7 +49,9 @@ public class Jeu {
             return gaufre[x][y];
         }
     }
+
     static boolean wentbackintime = false;
+
     // occupe une case x,y
     public static void occupe(int x, int y) throws RuntimeException {
         wentbackintime = false;
@@ -75,11 +78,11 @@ public class Jeu {
                 // tour = !tour; // tour du joueur suivant
                 if (tour == Turn.Player1) {
                     tour = Turn.Player2;
-                    if(_ui!=null)
+                    if (_ui != null)
                         _ui.player.setText("Player 2");
                 } else {
                     tour = Turn.Player1;
-                    if(_ui!=null)
+                    if (_ui != null)
                         _ui.player.setText("Player 1");
                 }
             }
@@ -89,7 +92,7 @@ public class Jeu {
     }
 
     public static void CTRL_Z() {
-        if (history.size() == 0 ) {
+        if (history.size() == 0) {
             System.out.println("0 coups a récuperer.\n");
             return;
         }
@@ -103,16 +106,16 @@ public class Jeu {
         wentbackintime = true;
         if (tour == Turn.Player1) {
             tour = Turn.Player2;
-            if (_ui != null){
+            if (_ui != null) {
                 _ui.player.setText("Player 2");
             }
         } else {
             tour = Turn.Player1;
-            if (_ui != null){
+            if (_ui != null) {
                 _ui.player.setText("Player 1");
             }
         }
-        if (_ui != null){
+        if (_ui != null) {
             _ui.repaint();
         }
     }
@@ -147,7 +150,8 @@ public class Jeu {
     public static boolean[][] terrain() {
         return gaufre;
     }
-    public static Stack<boolean[][]> pile(){
+
+    public static Stack<boolean[][]> pile() {
         return Jeu.history;
     }
 }
