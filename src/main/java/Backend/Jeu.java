@@ -24,8 +24,8 @@ public class Jeu {
         }
     }
 
-    public static void init(int _longeur, int _largeur) {
-        longueur = _longeur;
+    public static void init(int _longueur, int _largeur) {
+        longueur = _longueur;
         largeur = _largeur;
         gaufre = new boolean[longueur][largeur];
         // initialise toutes les cases par true (non occupée)
@@ -55,9 +55,9 @@ public class Jeu {
         } else if (y > largeur) {
             throw new RuntimeException("Erreur occupe: y > largeur du terrain");
         } else {
-            boolean[][] saved = new boolean[longeur()][largeur()];
+            boolean[][] saved = new boolean[longueur()][largeur()];
             for (int i = 0; i < largeur(); i++) {
-                for (int j = 0; j < longeur(); j++) {
+                for (int j = 0; j < longueur(); j++) {
                     saved[i][j] = gaufre[i][j];
                 }
             }
@@ -73,11 +73,9 @@ public class Jeu {
                 // tour = !tour; // tour du joueur suivant
                 if (tour == Turn.Player1) {
                     tour = Turn.Player2;
-                    if(_ui!=null)
                     _ui.player.setText("Player 2");
                 } else {
                     tour = Turn.Player1;
-                    if(_ui!=null)
                     _ui.player.setText("Player 1");
                 }
             }
@@ -94,18 +92,16 @@ public class Jeu {
         affiche();
         boolean[][] saved = history.pop();
         for (int i = 0; i < largeur(); i++) {
-            for (int j = 0; j < longeur(); j++) {
+            for (int j = 0; j < longueur(); j++) {
                 gaufre[i][j] = saved[i][j];
             }
         }
         wentbackintime = true;
         if (tour == Turn.Player1) {
             tour = Turn.Player2;
-            if(_ui!=null)
             _ui.player.setText("Player 2");
         } else {
             tour = Turn.Player1;
-            if(_ui!=null)
             _ui.player.setText("Player 1");
         }
         _ui.repaint();
@@ -126,7 +122,7 @@ public class Jeu {
         }
     }
 
-    public static int longeur() {
+    public static int longueur() {
         return Jeu.longueur;
     }
 
