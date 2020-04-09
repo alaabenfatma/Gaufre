@@ -59,7 +59,7 @@ public class AppTest {
         Jeu.init();
         Boolean test = true;
         
-        for(int y = 0; y < Jeu.longeur(); y++){
+        for(int y = 0; y < Jeu.longueur(); y++){
             for(int x = 0; x < Jeu.largeur(); x++){
                 test = test & Jeu.isFree(y,x);
             }
