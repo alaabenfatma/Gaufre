@@ -14,8 +14,10 @@ public class Jeu {
     public static UI _ui;
     public static GameLevel mode_IA = GameLevel.Easy;
     public static GameMode mode_JEU = GameMode.PVP;
+    public static boolean GameOver = false;
 
     public static void init() {
+        GameOver = false;
         longueur = 10;
         largeur = 10;
         tour = Turn.Player1;
@@ -30,6 +32,7 @@ public class Jeu {
     }
 
     public static void init(int _longueur, int _largeur) {
+        GameOver = false;
         longueur = _longueur;
         largeur = _largeur;
         tour = Turn.Player1;
@@ -57,6 +60,9 @@ public class Jeu {
 
     // occupe une case x,y
     public static void occupe(int x, int y) throws RuntimeException {
+        if (GameOver) {
+            return;
+        }
         wentbackintime = false;
         if (x > longueur) {
             throw new RuntimeException("Erreur occupe: x > longueur du terrain");
@@ -76,6 +82,7 @@ public class Jeu {
                 } else {
                     msgBox.MessageBox("Player 1 a perdu", "Gameover");
                 }
+                GameOver = true;
                 return;
             }
             _ui.repaint();
@@ -145,6 +152,10 @@ public class Jeu {
             }
             System.out.println("");
         }
+    }
+
+    public static boolean gameOver() {
+        return !isFree(0, 1) && !isFree(1, 0);
     }
 
     public static int longueur() {
