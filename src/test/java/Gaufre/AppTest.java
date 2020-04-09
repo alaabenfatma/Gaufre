@@ -15,7 +15,61 @@ import java.util.Stack;
  * Unit test for simple App.
  */
 public class AppTest {
-
+    private static int x_test=10,y_test=10;
+    @Test
+    public void test_initialisation1_1(){
+        Jeu.init();
+        assertEquals(10,Jeu.longueur());
+    }
+    @Test
+    public void test_initialisation1_2(){
+        Jeu.init();
+        assertEquals(10,Jeu.largeur());
+    }
+    @Test
+    public void test_initialisation1_3(){
+        Jeu.init();
+        assertEquals(Turn.Player1, Jeu.tour);
+    }
+    @Test
+    
+    public void test_initialisation1_4(){
+        Jeu.init();
+        Boolean test = true;
+        for(int y = 0; y < Jeu.longueur(); y++){
+            for(int x = 0; x < Jeu.largeur(); x++){
+                test = test & Jeu.isFree(y, x);
+            }
+        }
+        assertTrue(test);
+    }
+    @Test
+    public void test_initialisation2_1(){
+        Jeu.init(y_test,x_test);
+        assertEquals(10,Jeu.longueur());
+    }
+    @Test
+    public void test_initialisation2_2(){
+        Jeu.init(y_test,x_test);
+        assertEquals(10,Jeu.largeur());
+    }
+    @Test
+    public void test_initialisation2_3(){
+        Jeu.init(y_test,x_test);
+        assertEquals(Turn.Player1, Jeu.tour);
+    }
+    @Test
+    public void testinit_tab_all_true2(){
+        Jeu.init(y_test, x_test);
+        
+        Boolean test = true;
+        for(int y = 0; y < Jeu.longueur(); y++){
+            for(int x = 0; x < Jeu.largeur(); x++){
+                test = test & Jeu.isFree(y, x);
+            }
+        }
+        assertTrue(test);
+    }
     @Test
     public void testisFree() {
         Jeu.init();
@@ -46,8 +100,7 @@ public class AppTest {
         thrownException.expectMessage("Erreur isBusy: y > largeur du terrain");
         Jeu.isFree(x, y);
     }
-
-
+    
     @Test
     public void testisFree4(){
         Jeu.init();
@@ -56,56 +109,6 @@ public class AppTest {
         Jeu.occupe(x, y);
         assertFalse(Jeu.isFree(x, y));
     }
-
-
-    @Test
-    /*
-        On teste la fonction init sans arguments 
-    */
-    public void testinit_tab_all_true(){
-        Jeu.init();
-        
-        Boolean test = true;
-        
-        for(int y = 0; y < Jeu.longueur(); y++){
-            for(int x = 0; x < Jeu.largeur(); x++){
-                test = test & Jeu.isFree(y, x);
-            }
-        }
-        assertTrue(test);
-    }
-
-
-    @Test
-    /*
-        On teste la fonction init avec la longuer et la largeur
-    */
-    public void testinit_tab_all_true2(){
-        int longueur = 5;
-        int largeur = 5;
-        Jeu.init(longueur, largeur);
-        
-        Boolean test = true;
-        for(int y = 0; y < Jeu.longueur(); y++){
-            for(int x = 0; x < Jeu.largeur(); x++){
-                test = test & Jeu.isFree(y, x);
-            }
-        }
-        assertTrue(test);
-    }
-
-
-    @Test
-     /*
-        On vérifie si c'est au tour de Player 1 de jouer
-    */
-    public void test_joueur_1_init(){
-       
-        Jeu.init();
-        assertEquals(Turn.Player1, Jeu.tour);
-    }
-    
-
     @Test
     /*
         On vérifie si c'est au tour de Player 2 de jouer
