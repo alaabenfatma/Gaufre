@@ -4,11 +4,15 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import Ai.Coup;
+import Backend.Backend;
 import Backend.Jeu;
 import Backend.Turn;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 /**
@@ -258,10 +262,48 @@ public class AppTest {
 
     @Test
     public void test_fonctionnel_1(){
-        /*
-            Definir une liste de coup pour chaque joueur
-            Jouer la en fonction du programme
-            Regarder l'état de la grille à fin des coups 
-        */
+        Jeu.init();
+        boolean[][] matrice;
+        matrice=Jeu.terrain();
+        List<Coup> J1 = new ArrayList<Coup>();
+        List<Coup> J2 = new ArrayList<Coup>();
+        Jeu.init();
+        Jeu.occupe(2, 1);
+        Jeu.occupe(1,5);
+        matrice=Jeu.terrain();
+        Jeu.init();
+        Backend n = new Backend();
+        
+        J1.add(new Coup(7,8));
+        J1.add(new Coup(3,7));
+        J1.add(new Coup(5,1));
+        J1.add(new Coup(1,5));
+
+        J2.add(new Coup(6,5));
+        J2.add(new Coup(7,3));
+        J2.add(new Coup(2,1));
+        while(!J1.isEmpty() || !J2.isEmpty()){
+            if((J1.isEmpty() && Jeu.tour==Turn.Player1) || (J2.isEmpty() && Jeu.tour==Turn.Player2)){
+                break;
+            }
+            if(Jeu.tour==Turn.Player1){
+                n.jouer(J1.get(0).i,J1.get(0).j);
+                J1.remove(0);
+            }
+            else{
+                n.jouer(J2.get(0).i,J2.get(0).j);
+                J2.remove(0);
+            }
+        }
+        Boolean test=true;
+        boolean[][]gaufre=Jeu.terrain();
+        for(int j=0;j<Jeu.longueur();j++){
+            for(int i=0;i<Jeu.largeur();i++){
+                if(matrice[j][i]!=gaufre[j][i]){
+                    test=false;
+                }
+            }
+        }
+        assertTrue(test);
     }
 }
