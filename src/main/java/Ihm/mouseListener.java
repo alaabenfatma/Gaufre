@@ -12,6 +12,7 @@ import java.awt.event.*;
 
 public class mouseListener implements MouseListener {
     UI _ui;
+    boolean firstMove = false;
 
     mouseListener(UI ui) {
         _ui = ui;
@@ -25,7 +26,7 @@ public class mouseListener implements MouseListener {
         System.out.printf("Mouse position : (%d,%d)\nGame position : (%d,%d)\n", e.getX(), e.getY(), i, j);
 
         Jeu.occupe(i, j);
-        if (Jeu.mode_JEU == GameMode.PVA && Jeu.GameOver==false)
+        if (Jeu.mode_JEU == GameMode.PVA && Jeu.GameOver == false)
             Ai.IAgagnante();
 
         System.out.println("AI is playing.");
@@ -45,8 +46,11 @@ public class mouseListener implements MouseListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        // TODO Auto-generated method stub
-
+        if (firstMove) {
+            return;
+        }
+        firstMove = true;
+        Ai.IAgagnante();
     }
 
     @Override
