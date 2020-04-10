@@ -50,7 +50,8 @@ public class mouseListener implements MouseListener {
             return;
         }
         firstMove = true;
-        Ai.IAgagnante();
+        if (Jeu.mode_JEU == GameMode.PVA && Jeu.GameOver == false)
+            Ai.IAgagnante();
     }
 
     @Override
