@@ -21,18 +21,23 @@ public class AppTest {
         Jeu.init();
         assertEquals(10,Jeu.longueur());
     }
+
+
     @Test
     public void test_initialisation1_2(){
         Jeu.init();
         assertEquals(10,Jeu.largeur());
     }
+
+
     @Test
     public void test_initialisation1_3(){
         Jeu.init();
         assertEquals(Turn.Player1, Jeu.tour);
     }
+
+
     @Test
-    
     public void test_initialisation1_4(){
         Jeu.init();
         Boolean test = true;
@@ -43,21 +48,29 @@ public class AppTest {
         }
         assertTrue(test);
     }
+
+
     @Test
     public void test_initialisation2_1(){
         Jeu.init(y_test,x_test);
         assertEquals(10,Jeu.longueur());
     }
+
+
     @Test
     public void test_initialisation2_2(){
         Jeu.init(y_test,x_test);
         assertEquals(10,Jeu.largeur());
     }
+
+
     @Test
     public void test_initialisation2_3(){
         Jeu.init(y_test,x_test);
         assertEquals(Turn.Player1, Jeu.tour);
     }
+
+
     @Test
     public void testinit_tab_all_true2(){
         Jeu.init(y_test, x_test);
@@ -70,6 +83,8 @@ public class AppTest {
         }
         assertTrue(test);
     }
+
+
     @Test
     public void testisFree() {
         Jeu.init();
@@ -78,11 +93,12 @@ public class AppTest {
         assertTrue(Jeu.isFree(x, y));
     }
 
+
     @Rule
     public ExpectedException thrownException = ExpectedException.none();
     @Test
     public void testisFree2() throws Exception{
-        Jeu.init();
+        Jeu.init(); //longueur = 10
         int x = 50;
         int y = 1;
         thrownException.expect(RuntimeException.class);
@@ -109,6 +125,47 @@ public class AppTest {
         Jeu.occupe(x, y);
         assertFalse(Jeu.isFree(x, y));
     }
+
+    @Test 
+    public void testisFree_valeursNegatives_x() throws Exception {
+        Jeu.init();
+        int x = -3;
+        int y = 3;
+        thrownException.expect(ArrayIndexOutOfBoundsException.class);
+        Jeu.isFree(x, y);
+    }
+
+
+    @Test 
+    public void testisFree_valeursNegatives_y() throws Exception {
+        Jeu.init();
+        int x = 3;
+        int y = -3;
+        thrownException.expect(ArrayIndexOutOfBoundsException.class);
+        Jeu.isFree(x, y);
+    }
+
+
+    @Test 
+    public void testoccupe_valeursNegatives_x() throws Exception {
+        Jeu.init();
+        int x = -3;
+        int y = 3;
+        thrownException.expect(ArrayIndexOutOfBoundsException.class);
+        Jeu.occupe(x, y);
+    }
+
+
+    @Test 
+    public void testoccupe_valeursNegatives_y() throws Exception {
+        Jeu.init();
+        int x = 3;
+        int y = -3;
+        thrownException.expect(ArrayIndexOutOfBoundsException.class);
+        Jeu.occupe(x, y);
+    }
+
+
     @Test
     /*
         On vérifie si c'est au tour de Player 2 de jouer
@@ -120,6 +177,7 @@ public class AppTest {
         assertEquals(Turn.Player2, Jeu.tour);
     }
 
+
     @Test
     public void test_CTRL_Z(){
         final Stack<boolean[][]> Save;
@@ -130,6 +188,8 @@ public class AppTest {
         Jeu.CTRL_Z();
         assertEquals(Save, Jeu.pile());
     }
+
+
     @Test
     public void test_joueur_1_CTRL_Z(){
         Turn joueur;
@@ -140,19 +200,30 @@ public class AppTest {
         assertEquals(joueur,Jeu.tour());
 
     }
+
+
     @Test
     public void test_joueur_2_CTRL_Z(){
         Turn joueur;
         Jeu.init();
-        Jeu.occupe(5,5);
-        joueur=Jeu.tour();
+        Jeu.occupe(5, 5);
+        joueur = Jeu.tour();
         Jeu.occupe(4, 5);
-        Jeu.occupe(4,3);
+        Jeu.occupe(4, 3);
         Jeu.CTRL_Z();
         Jeu.CTRL_Z();
-        assertEquals(joueur,Jeu.tour());
+        assertEquals(joueur, Jeu.tour());
 
     }
+/*
+    @Test
+    public void testgameOver(){
+        Jeu.init();
+        Jeu.occupe(0, 0);
+        assertTrue(Jeu.gameOver());
+    }
+
+*/
     @Test
     public void test_fonctionnel_1(){
         /*

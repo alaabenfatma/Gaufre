@@ -85,8 +85,7 @@ public class Jeu {
                 GameOver = true;
                 return;
             }
-            if(_ui!=null)
-                _ui.repaint();
+            _ui.repaint();
             history.add(saved);
 
             affiche();
