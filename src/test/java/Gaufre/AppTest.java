@@ -15,7 +15,7 @@ import java.util.Stack;
  * Unit test for simple App.
  */
 public class AppTest {
-    private static int x_test=10,y_test=10;
+    private static int x_test = 10, y_test = 10;
     @Test
     public void test_initialisation1_1(){
         Jeu.init();
@@ -215,15 +215,47 @@ public class AppTest {
         assertEquals(joueur, Jeu.tour());
 
     }
-/*
+
+
     @Test
-    public void testgameOver(){
-        Jeu.init();
-        Jeu.occupe(0, 0);
-        assertTrue(Jeu.gameOver());
+    public void testremainingMovesTrue(){
+        int longueur = 10;
+        int largeur = 10;
+        Jeu.init(longueur, largeur);
+        Jeu.occupe(5, 5);
+        assertEquals(Jeu.remainingMoves(), 75);
+      }
+
+
+    @Test
+    public void testremainingMovesFalse(){
+        int longueur = 10;
+        int largeur = 10;
+        Jeu.init(longueur, largeur);
+        Jeu.occupe(5, 5);
+        assertNotEquals(Jeu.remainingMoves(), 20);
     }
 
-*/
+    /*
+    A vérifier avec alaa la fonction gameOver dans Jeu.java ne marche
+    pas très bien
+    */
+    @Test
+    public void testgameOverTrue(){
+        Jeu.init();
+        Jeu.occupe(0, 0);
+        assertTrue(Jeu.GameOver);
+    }
+
+
+    @Test
+    public void testgameOverFalse(){
+        Jeu.init();
+        Jeu.occupe(5, 5);
+        assertFalse(Jeu.gameOver());
+    }
+
+
     @Test
     public void test_fonctionnel_1(){
         /*
