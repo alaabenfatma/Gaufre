@@ -216,7 +216,7 @@ public class AppTest {
 
     }
 
-    
+
     @Test
     public void testremainingMovesTrue(){
         int longueur = 10;
@@ -234,16 +234,28 @@ public class AppTest {
         Jeu.init(longueur, largeur);
         Jeu.occupe(5, 5);
         assertNotEquals(Jeu.remainingMoves(), 20);
-      }
-/*
-    @Test
-    public void testgameOver(){
-        Jeu.init();
-        Jeu.occupe(0, 0);
-        assertTrue(Jeu.gameOver());
     }
 
-*/
+    /*
+    A vérifier avec alaa la fonction gameOver dans Jeu.java ne marche
+    pas très bien
+    */
+    @Test
+    public void testgameOverTrue(){
+        Jeu.init();
+        Jeu.occupe(0, 0);
+        assertTrue(Jeu.GameOver);
+    }
+
+
+    @Test
+    public void testgameOverFalse(){
+        Jeu.init();
+        Jeu.occupe(5, 5);
+        assertFalse(Jeu.gameOver());
+    }
+
+
     @Test
     public void test_fonctionnel_1(){
         /*
