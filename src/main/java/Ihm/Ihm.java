@@ -22,7 +22,6 @@ public class Ihm implements Runnable {
 		frame.setVisible(true);
 		
         frame.setSize(500,500);
-		frame.addMouseListener(new mouseListener(ui));
 		frame.addKeyListener(new keyListener());
         //frame.add(ui.player, BorderLayout.NORTH);
 		/*

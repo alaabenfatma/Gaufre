@@ -2,6 +2,7 @@ package Backend;
 
 import java.util.*;
 
+import Ai.Coup;
 import Ihm.UI;
 import Ihm.msgBox;
 
@@ -70,8 +71,8 @@ public class Jeu {
             throw new RuntimeException("Erreur occupe: y > largeur du terrain");
         } else {
             boolean[][] saved = new boolean[longueur()][largeur()];
-            for (int i = 0; i < largeur(); i++) {
-                for (int j = 0; j < longueur(); j++) {
+            for (int i = 0; i < longueur(); i++) {
+                for (int j = 0; j < largeur(); j++) {
                     saved[i][j] = gaufre[i][j];
                 }
             }
@@ -85,13 +86,11 @@ public class Jeu {
                 GameOver = true;
                 return;
             }
-            _ui.repaint();
             history.add(saved);
 
-            affiche();
             if (isFree(x, y)) {
-                for (int i = x; i < longueur; i++) {
-                    for (int j = y; j < largeur; j++) {
+                for (int i = x; i < longueur(); i++) {
+                    for (int j = y; j < largeur(); j++) {
                         gaufre[i][j] = false;
                     }
                 }
@@ -109,6 +108,7 @@ public class Jeu {
         }
         affiche();
 
+        _ui.repaint();
     }
 
     public static void CTRL_Z() {
@@ -153,7 +153,28 @@ public class Jeu {
             System.out.println("");
         }
     }
-
+    public static int remainingMoves(){
+        int c=0;
+        for (int i = 0; i < longueur; i++) {
+            for (int j = 0; j < largeur; j++) {
+                if(gaufre[i][j]==true){
+                    c++;
+                }
+            }
+        }
+        return c;
+    }
+    public static ArrayList<Coup> coupsPossibles(){
+        ArrayList<Coup> coups = new ArrayList<Coup>();
+        for (int i = 0; i < longueur; i++) {
+            for (int j = 0; j < largeur; j++) {
+                if(gaufre[i][j]==true){
+                   coups.add(new Coup(i,j));
+                }
+            }
+        }
+        return coups;
+    } 
     public static boolean gameOver() {
         return !isFree(0, 1) && !isFree(1, 0);
     }

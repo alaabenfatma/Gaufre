@@ -16,7 +16,7 @@ public class UI extends JComponent {
         try {
             InputStream img = UI.class.getResourceAsStream("gaufre.png");
             gauffre = ImageIO.read(img);
-            img =  UI.class.getResourceAsStream("poison.png");
+            img = UI.class.getResourceAsStream("poison.png");
             poison = ImageIO.read(img);
             Jeu._ui = this;
         } catch (IOException e) {
@@ -24,41 +24,56 @@ public class UI extends JComponent {
         }
 
     }
+
     int counter = 0;
-    public void clear(){
+
+    public void clear() {
         Graphics2D drawable = (Graphics2D) this.getGraphics();
         int width = getSize().width;
-		int height = getSize().height;
-		drawable.clearRect(0, 0, width, height);
+        int height = getSize().height;
+        drawable.clearRect(0, 0, width, height);
     }
+
     public Dimension cellSize;
+
     public void paintComponent(Graphics g) {
-        clear();
+        Component[] components = getComponents();
+        for (Component component : components) {
+            if (component instanceof Cell)
+                this.remove(component);
+        }
         Dimension d = this.getSize();
-        if(d==null){
+        if (d == null) {
             System.out.println("Couldn't get dimensions\n");
             System.exit(1);
         }
         int x = 0, y = 0;
         int w = d.width / Jeu.largeur();
         int h = d.height / Jeu.longueur();
-        cellSize = new Dimension(w,h);
+        cellSize = new Dimension(w, h);
         System.out.println(h + " " + w);
         Graphics2D drawable = (Graphics2D) g;
         try {
             for (int i = 0; i < Jeu.longueur(); i++) {
                 x = 0;
                 for (int j = 0; j < Jeu.largeur(); j++) {
-                    if(i==0 && j==0){
-                        drawable.drawImage(poison, x, y, w, h, null);
-                    }
-                    else if (Jeu.terrain()[i][j] == true) {
-                        drawable.drawImage(gauffre, x, y, w, h, null);
+                    if (i == 0 && j == 0) {
+                        Cell c = new Cell(poison, i, j, w, h);
+                        c.setLocation(x, y);
+                        c.setSize(w, h);
+                        this.add(c);
+                    } else if (Jeu.terrain()[i][j] == true) {
+                        // drawable.drawImage(gauffre, x, y, w, h, null);
+                        Cell c = new Cell(gauffre, i, j, w, h);
+                        c.setLocation(x, y);
+                        c.setSize(w, h);
+                        this.add(c);
                     } else if (Jeu.terrain()[i][j] == false) {
-                        drawable.setColor(Color.WHITE);
-                        drawable.setBackground(Color.WHITE);
-                        drawable.drawRect( x, y, w, h);
-                        
+                        Cell c = new Cell(null, i, j, w, h);
+                        c.setLocation(x, y);
+                        c.setSize(w, h);
+                        this.add(c);
+
                     }
                     x += w;
 
@@ -66,7 +81,7 @@ public class UI extends JComponent {
                 y += h;
             }
             drawable.setColor(Color.black);
-            drawable.drawString(player.getText(), x-(w/2), y);
+            drawable.drawString(player.getText(), x - (w / 2), y);
         } catch (Exception e) {
             // TODO: handle exception
         }

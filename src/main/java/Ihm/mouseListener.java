@@ -11,20 +11,18 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class mouseListener implements MouseListener {
-    UI _ui;
+    Cell _cell;
     boolean firstMove = false;
 
-    mouseListener(UI ui) {
-        _ui = ui;
+    mouseListener(Cell cell) {
+        this._cell = cell;
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        int i, j;
-        i = (int) Math.floor(e.getY() / _ui.cellSize.height);
-        j = (int) Math.floor(e.getX() / _ui.cellSize.width);
+        int i = _cell.x;
+        int j = _cell.y;
         System.out.printf("Mouse position : (%d,%d)\nGame position : (%d,%d)\n", e.getX(), e.getY(), i, j);
-
         Jeu.occupe(i, j);
         if (Jeu.mode_JEU == GameMode.PVA && Jeu.GameOver == false)
             Ai.IAgagnante();
