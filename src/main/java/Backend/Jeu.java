@@ -107,8 +107,8 @@ public class Jeu {
             }
         }
         affiche();
-
-        _ui.repaint();
+        if(_ui!=null)
+            _ui.repaint();
     }
 
     public static void CTRL_Z() {
