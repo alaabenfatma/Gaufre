@@ -15,7 +15,7 @@ import java.util.Stack;
  * Unit test for simple App.
  */
 public class AppTest {
-    private static int x_test=10,y_test=10;
+    private static int x_test = 10, y_test = 10;
     @Test
     public void test_initialisation1_1(){
         Jeu.init();
@@ -215,6 +215,26 @@ public class AppTest {
         assertEquals(joueur, Jeu.tour());
 
     }
+
+    
+    @Test
+    public void testremainingMovesTrue(){
+        int longueur = 10;
+        int largeur = 10;
+        Jeu.init(longueur, largeur);
+        Jeu.occupe(5, 5);
+        assertEquals(Jeu.remainingMoves(), 75);
+      }
+
+
+    @Test
+    public void testremainingMovesFalse(){
+        int longueur = 10;
+        int largeur = 10;
+        Jeu.init(longueur, largeur);
+        Jeu.occupe(5, 5);
+        assertNotEquals(Jeu.remainingMoves(), 20);
+      }
 /*
     @Test
     public void testgameOver(){
