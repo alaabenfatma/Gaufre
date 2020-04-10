@@ -153,4 +153,12 @@ public class AppTest {
         assertEquals(joueur,Jeu.tour());
 
     }
+    @Test
+    public void test_fonctionnel_1(){
+        /*
+            Definir une liste de coup pour chaque joueur
+            Jouer la en fonction du programme
+            Regarder l'état de la grille à fin des coups 
+        */
+    }
 }
