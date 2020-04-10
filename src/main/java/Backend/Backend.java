@@ -56,20 +56,17 @@ public class Backend {
     }
 
     public static void jouer(int x, int y) {
-        boolean perdu = false;
         Jeu.affiche();
-        while (!perdu) {
-            if ((x == 0) && (x == 0)) {
-                // on a perdu
-                if (Jeu.tour() == Turn.Player2) {
-                    System.out.println("Player 2 a perdu");
-                } else {
-                    System.out.println("Player 1 a perdu");
-                }
-                perdu = true;
+        if ((x == 0) && (x == 0)) {
+             // on a perdu
+             if (Jeu.tour() == Turn.Player2) {
+                 System.out.println("Player 2 a perdu");
             } else {
-                Jeu.occupe(x, y);
+                 System.out.println("Player 1 a perdu");
             }
+
+        } else {
+            Jeu.occupe(x, y);
         }
     }
 
