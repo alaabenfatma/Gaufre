@@ -135,7 +135,8 @@ public class AppTest {
         Jeu.init();
         int x = -3;
         int y = 3;
-        thrownException.expect(ArrayIndexOutOfBoundsException.class);
+        thrownException.expect(RuntimeException.class);
+        thrownException.expectMessage("x ou y est inférieur à 0");
         Jeu.isFree(x, y);
     }
 
@@ -145,7 +146,8 @@ public class AppTest {
         Jeu.init();
         int x = 3;
         int y = -3;
-        thrownException.expect(ArrayIndexOutOfBoundsException.class);
+        thrownException.expect(RuntimeException.class);
+        thrownException.expectMessage("x ou y est inférieur à 0");
         Jeu.isFree(x, y);
     }
 
@@ -155,7 +157,8 @@ public class AppTest {
         Jeu.init();
         int x = -3;
         int y = 3;
-        thrownException.expect(ArrayIndexOutOfBoundsException.class);
+        thrownException.expect(RuntimeException.class);
+        thrownException.expectMessage("occupe : x ou y est inférieur à 0");
         Jeu.occupe(x, y);
     }
 
@@ -165,7 +168,8 @@ public class AppTest {
         Jeu.init();
         int x = 3;
         int y = -3;
-        thrownException.expect(ArrayIndexOutOfBoundsException.class);
+        thrownException.expect(RuntimeException.class);
+        thrownException.expectMessage("occupe : x ou y est inférieur à 0");
         Jeu.occupe(x, y);
     }
 

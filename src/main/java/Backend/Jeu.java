@@ -48,6 +48,9 @@ public class Jeu {
 
     // renvoie vrai si la case x et y n'a pas encore été occupée
     public static boolean isFree(int x, int y) throws RuntimeException {
+        if (x < 0 || y < 0){
+            throw new RuntimeException("x ou y est inférieur à 0");
+        }
         if (x > longueur) {
             throw new RuntimeException("Erreur isBusy: x > longueur du terrain");
         } else if (y > largeur) {
@@ -65,6 +68,9 @@ public class Jeu {
             return;
         }
         wentbackintime = false;
+        if (x < 0 || y < 0){
+            throw new RuntimeException("occupe : x ou y est inférieur à 0");
+        }
         if (x > longueur) {
             throw new RuntimeException("Erreur occupe: x > longueur du terrain");
         } else if (y > largeur) {
