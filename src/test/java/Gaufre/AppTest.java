@@ -276,7 +276,6 @@ public class AppTest {
         Jeu.occupe(1,5);
         matrice=Jeu.terrain();
         Jeu.init();
-        Backend n = new Backend();
         
         J1.add(new Coup(7,8));
         J1.add(new Coup(3,7));
@@ -291,11 +290,11 @@ public class AppTest {
                 break;
             }
             if(Jeu.tour==Turn.Player1){
-                n.jouer(J1.get(0).i,J1.get(0).j);
+                Backend.jouer(J1.get(0).i,J1.get(0).j);
                 J1.remove(0);
             }
             else{
-                n.jouer(J2.get(0).i,J2.get(0).j);
+                Backend.jouer(J2.get(0).i,J2.get(0).j);
                 J2.remove(0);
             }
         }
