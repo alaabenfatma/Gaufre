@@ -55,7 +55,7 @@ public class Backend {
         myInput.close();
     }
 
-    public static void jouer(int x, int y) {
+    public void jouer(int x, int y) {
         Jeu.affiche();
         if ((x == 0) && (x == 0)) {
              // on a perdu
