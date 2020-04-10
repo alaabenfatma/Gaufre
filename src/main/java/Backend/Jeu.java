@@ -47,7 +47,7 @@ public class Jeu {
     }
 
     // renvoie vrai si la case x et y n'a pas encore été occupée
-    public static boolean isFree(int x, int y) throws RuntimeException {
+    public static boolean isFree(int y, int x) throws RuntimeException {
         if (x < 0 || y < 0){
             throw new RuntimeException("x ou y est inférieur à 0");
         }
@@ -63,7 +63,7 @@ public class Jeu {
     static boolean wentbackintime = false;
 
     // occupe une case x,y
-    public static void occupe(int x, int y) throws RuntimeException {
+    public static void occupe(int y, int x) throws RuntimeException {
         if (GameOver) {
             return;
         }

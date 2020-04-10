@@ -71,7 +71,7 @@ public class Backend {
     }
 
     public static void main(String[] args) {
-        Jeu.init();
+        Jeu.init(2,6);
         Backend n = new Backend();
         n.joue();
     }
