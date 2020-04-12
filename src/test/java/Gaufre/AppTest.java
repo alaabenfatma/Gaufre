@@ -150,10 +150,10 @@ public class AppTest {
         thrownException.expectMessage("x ou y est inférieur à 0");
         Jeu.isFree(x, y);
     }
-
-
+    
+    
     @Test 
-    public void testoccupe_valeursNegatives_x() throws Exception {
+    public void testoccupe_2arguments_valeursNegatives_x() throws Exception {
         Jeu.init();
         int x = -3;
         int y = 3;
@@ -162,9 +162,8 @@ public class AppTest {
         Jeu.occupe(x, y);
     }
 
-
     @Test 
-    public void testoccupe_valeursNegatives_y() throws Exception {
+    public void testoccupe_2arguments_valeursNegatives_y() throws Exception {
         Jeu.init();
         int x = 3;
         int y = -3;
@@ -173,6 +172,39 @@ public class AppTest {
         Jeu.occupe(x, y);
     }
 
+    @Test 
+    public void testoccupe_3arguments_valeursNegatives_x() throws Exception {
+        Jeu.init();
+        int x = -3;
+        int y = 3;
+        boolean[][] map = new boolean[10][10];
+        thrownException.expect(RuntimeException.class);
+        thrownException.expectMessage("occupe : x ou y est inférieur à 0");
+        Jeu.occupe(map, x, y);
+    }
+
+
+    @Test 
+    public void testoccupe_3arguments_valeursNegatives_y() throws Exception {
+        Jeu.init();
+        int x = 3;
+        int y = -3;
+        boolean[][] map = new boolean[10][10];
+        thrownException.expect(RuntimeException.class);
+        thrownException.expectMessage("occupe : x ou y est inférieur à 0");
+        Jeu.occupe(map, x, y);
+    }
+
+    @Test 
+    public void testoccupe_3arguments_map() throws Exception {
+        Jeu.init(5, 5);
+        int x = 3;
+        int y = 3;
+        boolean[][] map = new boolean[1][5];
+        thrownException.expect(ArrayIndexOutOfBoundsException.class);
+        Jeu.occupe(map, x, y);
+    }
+    
 
     @Test
     /*
