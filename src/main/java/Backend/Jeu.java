@@ -194,6 +194,19 @@ public class Jeu {
             System.out.println("");
         }
     }
+    // affiche la gaufre
+    public static void affiche(boolean[][] map) {
+        for (int i = 0; i < longueur; i++) {
+            for (int j = 0; j < largeur; j++) {
+                if (map[i][j]) {
+                    System.out.print("-");
+                } else {
+                    System.out.print(" ");
+                }
+            }
+            System.out.println("");
+        }
+    }
 
     public static int remainingMoves() {
         int c = 0;
@@ -217,11 +230,20 @@ public class Jeu {
                 }
             }
         }
+        //Collections.reverse(coups);
         return coups;
     }
 
     public static boolean gameOver(boolean[][] map) {
-        return !(map[0][1]) && !(map[1][0]) && !(map[1][1]);
+        if(map[0][0]==true){
+            if(map[0][1]==true){
+                return false;
+            }
+            if(map[1][0]==true){
+                return false;
+            }
+        }
+        return true;
     }
 
     public static int longueur() {

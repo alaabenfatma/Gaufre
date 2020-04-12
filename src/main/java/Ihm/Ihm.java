@@ -2,7 +2,13 @@ package Ihm;
 
 import javax.swing.*;
 
+import Ai.Brain;
+import Ai.Coup;
+
+import java.awt.*;
+import java.awt.event.*;
 import Backend.Jeu;
+import Backend.Turn;
 
 public class Ihm implements Runnable {
     public void run() {
@@ -10,9 +16,7 @@ public class Ihm implements Runnable {
 		JFrame frame = new JFrame("Gauffre");
 		// Ajout de notre composant de dessin dans la fenetre
 		UI ui = new UI();
-        frame.add(ui);
-        
-        
+		frame.add(ui);
 		//frame.addKeyListener(new EcouteurKey(j,ng));
 		// Un clic sur le bouton de fermeture clos l'application
 		
