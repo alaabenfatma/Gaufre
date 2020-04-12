@@ -47,10 +47,7 @@ public class Jeu {
     }
 
     // renvoie vrai si la case x et y n'a pas encore été occupée
-    public static boolean isFree(int y, int x) throws RuntimeException {
-        if (x < 0 || y < 0){
-            throw new RuntimeException("x ou y est inférieur à 0");
-        }
+    public static boolean isFree(int x, int y) throws RuntimeException {
         if (x > longueur) {
             throw new RuntimeException("Erreur isBusy: x > longueur du terrain");
         } else if (y > largeur) {
@@ -63,14 +60,52 @@ public class Jeu {
     static boolean wentbackintime = false;
 
     // occupe une case x,y
-    public static void occupe(int y, int x) throws RuntimeException {
+    public static void occupe(boolean[][] map, int x, int y) throws RuntimeException {
         if (GameOver) {
             return;
         }
         wentbackintime = false;
-        if (x < 0 || y < 0){
-            throw new RuntimeException("occupe : x ou y est inférieur à 0");
+        if (x > longueur) {
+            throw new RuntimeException("Erreur occupe: x > longueur du terrain");
+        } else if (y > largeur) {
+            throw new RuntimeException("Erreur occupe: y > largeur du terrain");
+        } else {
+            if ((x == 0) && (y == 0)) {
+                // on a perdu
+                if (Jeu.tour() == Turn.Player2) {
+                    msgBox.MessageBox("Player 2 a perdu", "Gameover");
+                } else {
+                    msgBox.MessageBox("Player 1 a perdu", "Gameover");
+                }
+                GameOver = true;
+                return;
+            }
+            if (isFree(x, y)) {
+                for (int i = x; i < longueur(); i++) {
+                    for (int j = y; j < largeur(); j++) {
+                        map[i][j] = false;
+                    }
+                }
+                // tour = !tour; // tour du joueur suivant
+                if (tour == Turn.Player1) {
+                    tour = Turn.Player2;
+                    if (_ui != null)
+                        _ui.player.setText("Player 2");
+                } else {
+                    tour = Turn.Player1;
+                    if (_ui != null)
+                        _ui.player.setText("Player 1");
+                }
+            }
         }
+        _ui.repaint();
+    }
+
+    public static void occupe(int x, int y) throws RuntimeException {
+        if (GameOver) {
+            return;
+        }
+        wentbackintime = false;
         if (x > longueur) {
             throw new RuntimeException("Erreur occupe: x > longueur du terrain");
         } else if (y > largeur) {
@@ -113,8 +148,8 @@ public class Jeu {
             }
         }
         affiche();
-        if(_ui!=null)
-            _ui.repaint();
+
+        _ui.repaint();
     }
 
     public static void CTRL_Z() {
@@ -159,30 +194,34 @@ public class Jeu {
             System.out.println("");
         }
     }
-    public static int remainingMoves(){
-        int c=0;
+
+    public static int remainingMoves() {
+        int c = 0;
         for (int i = 0; i < longueur; i++) {
             for (int j = 0; j < largeur; j++) {
-                if(gaufre[i][j]==true){
+                if (gaufre[i][j] == true) {
                     c++;
                 }
             }
         }
         return c;
     }
-    public static ArrayList<Coup> coupsPossibles(){
+
+    public static ArrayList<Coup> coupsPossibles(boolean[][] map) {
         ArrayList<Coup> coups = new ArrayList<Coup>();
         for (int i = 0; i < longueur; i++) {
             for (int j = 0; j < largeur; j++) {
-                if(gaufre[i][j]==true){
-                   coups.add(new Coup(i,j));
+                if (map[i][j] == true) {
+                    if (i + j != 0)
+                        coups.add(new Coup(i, j));
                 }
             }
         }
         return coups;
-    } 
-    public static boolean gameOver() {
-        return !isFree(0, 1) && !isFree(1, 0);
+    }
+
+    public static boolean gameOver(boolean[][] map) {
+        return !(map[0][1]) && !(map[1][0]) && !(map[1][1]);
     }
 
     public static int longueur() {
@@ -200,6 +239,16 @@ public class Jeu {
 
     public static boolean[][] terrain() {
         return gaufre;
+    }
+
+    public static boolean[][] copyOfTerrain() {
+        boolean[][] cpy = new boolean[longueur()][largeur()];
+        for (int i = 0; i < longueur(); i++) {
+            for (int j = 0; j < largeur(); j++) {
+                cpy[i][j] = gaufre[i][j];
+            }
+        }
+        return cpy;
     }
 
     public static Stack<boolean[][]> pile() {

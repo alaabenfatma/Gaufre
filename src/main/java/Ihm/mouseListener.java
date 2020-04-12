@@ -3,6 +3,8 @@ package Ihm;
 import javax.swing.*;
 
 import Ai.Ai;
+import Ai.Brain;
+import Ai.Coup;
 import Backend.GameMode;
 import Backend.Jeu;
 import Backend.Turn;
@@ -11,23 +13,16 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class mouseListener implements MouseListener {
-    Cell _cell;
+    Coup coupCourant = null;
     boolean firstMove = false;
 
-    mouseListener(Cell cell) {
-        this._cell = cell;
+    public mouseListener(UI cell) {
+        
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        int i = _cell.x;
-        int j = _cell.y;
-        System.out.printf("Mouse position : (%d,%d)\nGame position : (%d,%d)\n", e.getX(), e.getY(), i, j);
-        Jeu.occupe(i, j);
-        if (Jeu.mode_JEU == GameMode.PVA && Jeu.GameOver == false)
-            Ai.IAgagnante();
-
-        System.out.println("AI is playing.");
+      
     }
 
     @Override
@@ -44,12 +39,6 @@ public class mouseListener implements MouseListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        if (firstMove) {
-            return;
-        }
-        firstMove = true;
-        if (Jeu.mode_JEU == GameMode.PVA && Jeu.GameOver == false)
-            Ai.IAgagnante();
     }
 
     @Override

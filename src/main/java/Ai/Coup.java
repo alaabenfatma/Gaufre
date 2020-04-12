@@ -8,4 +8,7 @@ public class Coup {
         i = _i;
         j = _j;
     }
+    public  String toString(){
+        return "("+i+","+j+")";
+    }
 }

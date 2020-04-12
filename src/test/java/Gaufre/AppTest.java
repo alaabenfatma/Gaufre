@@ -260,7 +260,7 @@ public class AppTest {
     public void testgameOverFalse(){
         Jeu.init();
         Jeu.occupe(5, 5);
-        assertFalse(Jeu.gameOver());
+        assertFalse(Jeu.gameOver(Jeu.terrain()));
     }
 
 

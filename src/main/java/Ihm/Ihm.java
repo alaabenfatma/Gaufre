@@ -18,7 +18,8 @@ public class Ihm implements Runnable {
 		
 
         // On fixe la taille et on demarre
-        ui.setVisible(true);
+		ui.setVisible(true);
+		frame.addMouseListener(new mouseListener(ui));
 		frame.setVisible(true);
 		
         frame.setSize(500,500);

@@ -53,7 +53,7 @@ public class Ai {
 
     public static boolean IAgagnante() {
         // Version améliorée ++ qui fait les meilleurs coups
-        if (Jeu.gameOver() || Jeu.GameOver){
+        if (Jeu.gameOver(Jeu.terrain()) || Jeu.GameOver){
             msgBox.MessageBox("IA LOST", "game over");
             return false;
         }
