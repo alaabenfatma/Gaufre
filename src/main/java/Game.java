@@ -18,7 +18,7 @@ public class Game implements Runnable {
         twoPlayers.addMouseListener(new MouseAdapter() {
 
             public void mouseClicked(MouseEvent e) {
-                Jeu.init(5,5);
+                Jeu.init(5,2);
                 Jeu.mode_JEU = GameMode.PVP;
                 SwingUtilities.invokeLater(new Ihm());
             }
@@ -28,7 +28,7 @@ public class Game implements Runnable {
         playerIA.addMouseListener(new MouseAdapter() {
 
             public void mouseClicked(MouseEvent e) {
-                Jeu.init(5,5);
+                Jeu.init(4,6);
                 Jeu.mode_JEU = GameMode.PVA;
                 SwingUtilities.invokeLater(new Ihm());
             }

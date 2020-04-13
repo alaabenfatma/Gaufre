@@ -51,11 +51,12 @@ public class Jeu {
         if (x < 0 || y < 0){
             throw new RuntimeException("x ou y est inférieur à 0");
         }
-        if (x > longueur) {
+        if (x >= longueur ) {
             throw new RuntimeException("Erreur isBusy: x > longueur du terrain");
-        } else if (y > largeur) {
+        } else if (y >= largeur) {
             throw new RuntimeException("Erreur isBusy: y > largeur du terrain");
         } else {
+            System.out.println(x+" "+y);
             return gaufre[x][y];
         }
     }
@@ -71,9 +72,9 @@ public class Jeu {
         if (x < 0 || y < 0){
             throw new RuntimeException("occupe : x ou y est inférieur à 0");
         }
-        if (x > longueur) {
+        if (x > largeur) {
             throw new RuntimeException("Erreur occupe: x > longueur du terrain");
-        } else if (y > largeur) {
+        } else if (y > longueur) {
             throw new RuntimeException("Erreur occupe: y > largeur du terrain");
         } else {
             if ((x == 0) && (y == 0)) {
@@ -117,9 +118,9 @@ public class Jeu {
         if (x < 0 || y < 0){
             throw new RuntimeException("occupe : x ou y est inférieur à 0");
         }
-        if (x > longueur) {
+        if (x > largeur) {
             throw new RuntimeException("Erreur occupe: x > longueur du terrain");
-        } else if (y > largeur) {
+        } else if (y > longueur) {
             throw new RuntimeException("Erreur occupe: y > largeur du terrain");
         } else {
             boolean[][] saved = new boolean[longueur()][largeur()];
@@ -198,7 +199,7 @@ public class Jeu {
     public static void affiche() {
         for (int i = 0; i < longueur; i++) {
             for (int j = 0; j < largeur; j++) {
-                if (Jeu.isFree(j, i)) {
+                if (Jeu.isFree(i,j)) {
                     System.out.print("-");
                 } else {
                     System.out.print(" ");
@@ -232,6 +233,17 @@ public class Jeu {
         }
         return c;
     }
+    public static int remainingMoves(boolean[][] map) {
+        int c = 0;
+        for (int i = 0; i < longueur; i++) {
+            for (int j = 0; j < largeur; j++) {
+                if (map[i][j] == true) {
+                    c++;
+                }
+            }
+        }
+        return c;
+    }
 
     public static ArrayList<Coup> coupsPossibles(boolean[][] map) {
         ArrayList<Coup> coups = new ArrayList<Coup>();
@@ -239,7 +251,7 @@ public class Jeu {
             for (int j = 0; j < largeur; j++) {
                 if (map[i][j] == true) {
                     if (i + j != 0)
-                        coups.add(new Coup(i, j));
+                        coups.add(new Coup(i,j));
                 }
             }
         }
@@ -248,15 +260,9 @@ public class Jeu {
     }
 
     public static boolean gameOver(boolean[][] map) {
-        if(map[0][0]==true){
-            if(map[0][1]==true){
-                return false;
-            }
-            if(map[1][0]==true){
-                return false;
-            }
-        }
-        return true;
+        int x = remainingMoves(map);
+        System.out.println("Remaining moves : "+x);
+        return x<=1;
     }
 
     public static int longueur() {
@@ -281,6 +287,15 @@ public class Jeu {
         for (int i = 0; i < longueur(); i++) {
             for (int j = 0; j < largeur(); j++) {
                 cpy[i][j] = gaufre[i][j];
+            }
+        }
+        return cpy;
+    }
+    public static boolean[][] copyOfTerrain(boolean[][] map) {
+        boolean[][] cpy = new boolean[longueur()][largeur()];
+        for (int i = 0; i < longueur(); i++) {
+            for (int j = 0; j < largeur(); j++) {
+                cpy[i][j] = map[i][j];
             }
         }
         return cpy;
