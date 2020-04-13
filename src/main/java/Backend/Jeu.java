@@ -48,10 +48,10 @@ public class Jeu {
 
     // renvoie vrai si la case x et y n'a pas encore été occupée
     public static boolean isFree(int x, int y) throws RuntimeException {
-        if (x < 0 || y < 0){
+        if (x < 0 || y < 0) {
             throw new RuntimeException("x ou y est inférieur à 0");
         }
-        if (x >= longueur ) {
+        if (x >= longueur) {
             throw new RuntimeException("Erreur isBusy: x > longueur du terrain");
         } else if (y >= largeur) {
             throw new RuntimeException("Erreur isBusy: y > largeur du terrain");
@@ -68,7 +68,7 @@ public class Jeu {
             return;
         }
         wentbackintime = false;
-        if (x < 0 || y < 0){
+        if (x < 0 || y < 0) {
             throw new RuntimeException("occupe : x ou y est inférieur à 0");
         }
         if (x > largeur) {
@@ -79,9 +79,15 @@ public class Jeu {
             if ((x == 0) && (y == 0)) {
                 // on a perdu
                 if (Jeu.tour() == Turn.Player2) {
-                    msgBox.MessageBox("Player 2 a perdu", "Gameover");
+                    if (mode_JEU == GameMode.PVA)
+                        msgBox.MessageBox("You won against the AI.", "Gameover");
+                    else
+                        msgBox.MessageBox("Player 1 a perdu", "Gameover");
                 } else {
-                    msgBox.MessageBox("Player 1 a perdu", "Gameover");
+                    if (mode_JEU == GameMode.PVA)
+                        msgBox.MessageBox("You lost against the AI", "Gameover");
+                    else
+                        msgBox.MessageBox("Player 2 a perdu", "Gameover");
                 }
                 GameOver = true;
                 return;
@@ -104,18 +110,17 @@ public class Jeu {
                 }
             }
         }
-        if(_ui != null){ 
+        if (_ui != null) {
             _ui.repaint();
         }
     }
 
     public static void occupe(int x, int y) throws RuntimeException {
-        msgBox.MessageBox("POSITION : x:"+x+",y:"+y,"long : "+longueur+" larg : "+largeur);
         if (GameOver) {
             return;
         }
         wentbackintime = false;
-        if (x < 0 || y < 0){
+        if (x < 0 || y < 0) {
             throw new RuntimeException("occupe : x ou y est inférieur à 0");
         }
         if (x > longueur) {
@@ -132,9 +137,15 @@ public class Jeu {
             if ((x == 0) && (y == 0)) {
                 // on a perdu
                 if (Jeu.tour() == Turn.Player2) {
-                    msgBox.MessageBox("Player 2 a perdu", "Gameover");
+                    if (mode_JEU == GameMode.PVA)
+                        msgBox.MessageBox("You won against the AI.", "Gameover");
+                    else
+                        msgBox.MessageBox("Player 1 a perdu", "Gameover");
                 } else {
-                    msgBox.MessageBox("Player 1 a perdu", "Gameover");
+                    if (mode_JEU == GameMode.PVA)
+                        msgBox.MessageBox("You lost against the AI", "Gameover");
+                    else
+                        msgBox.MessageBox("Player 2 a perdu", "Gameover");
                 }
                 GameOver = true;
                 return;
@@ -161,7 +172,7 @@ public class Jeu {
         }
         affiche();
 
-        if(_ui != null){
+        if (_ui != null) {
             _ui.repaint();
         }
     }
@@ -199,7 +210,7 @@ public class Jeu {
     public static void affiche() {
         for (int i = 0; i < longueur; i++) {
             for (int j = 0; j < largeur; j++) {
-                if (Jeu.isFree(i,j)) {
+                if (Jeu.isFree(i, j)) {
                     System.out.print("-");
                 } else {
                     System.out.print(" ");
@@ -208,6 +219,7 @@ public class Jeu {
             System.out.println("");
         }
     }
+
     // affiche la gaufre
     public static void affiche(boolean[][] map) {
         for (int i = 0; i < longueur; i++) {
@@ -233,6 +245,7 @@ public class Jeu {
         }
         return c;
     }
+
     public static int remainingMoves(boolean[][] map) {
         int c = 0;
         for (int i = 0; i < longueur; i++) {
@@ -251,7 +264,7 @@ public class Jeu {
             for (int j = 0; j < largeur; j++) {
                 if (map[i][j] == true) {
                     if (i + j != 1)
-                        coups.add(new Coup(i,j));
+                        coups.add(new Coup(i, j));
                 }
             }
         }
@@ -260,7 +273,7 @@ public class Jeu {
 
     public static boolean gameOver(boolean[][] map) {
         int x = remainingMoves(map);
-        return x<=1;
+        return x <= 1;
     }
 
     public static int longueur() {
@@ -289,6 +302,7 @@ public class Jeu {
         }
         return cpy;
     }
+
     public static boolean[][] copyOfTerrain(boolean[][] map) {
         boolean[][] cpy = new boolean[longueur()][largeur()];
         for (int i = 0; i < longueur(); i++) {
