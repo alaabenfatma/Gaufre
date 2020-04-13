@@ -56,7 +56,6 @@ public class Jeu {
         } else if (y >= largeur) {
             throw new RuntimeException("Erreur isBusy: y > largeur du terrain");
         } else {
-            System.out.println(x+" "+y);
             return gaufre[x][y];
         }
     }
@@ -111,6 +110,7 @@ public class Jeu {
     }
 
     public static void occupe(int x, int y) throws RuntimeException {
+        msgBox.MessageBox("POSITION : x:"+x+",y:"+y,"long : "+longueur+" larg : "+largeur);
         if (GameOver) {
             return;
         }
@@ -118,9 +118,9 @@ public class Jeu {
         if (x < 0 || y < 0){
             throw new RuntimeException("occupe : x ou y est inférieur à 0");
         }
-        if (x > largeur) {
+        if (x > longueur) {
             throw new RuntimeException("Erreur occupe: x > longueur du terrain");
-        } else if (y > longueur) {
+        } else if (y > largeur) {
             throw new RuntimeException("Erreur occupe: y > largeur du terrain");
         } else {
             boolean[][] saved = new boolean[longueur()][largeur()];
@@ -250,18 +250,16 @@ public class Jeu {
         for (int i = 0; i < longueur; i++) {
             for (int j = 0; j < largeur; j++) {
                 if (map[i][j] == true) {
-                    if (i + j != 0)
+                    if (i + j != 1)
                         coups.add(new Coup(i,j));
                 }
             }
         }
-        //Collections.reverse(coups);
         return coups;
     }
 
     public static boolean gameOver(boolean[][] map) {
         int x = remainingMoves(map);
-        System.out.println("Remaining moves : "+x);
         return x<=1;
     }
 

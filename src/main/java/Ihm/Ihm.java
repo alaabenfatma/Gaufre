@@ -17,7 +17,7 @@ public class Ihm implements Runnable {
 		// Ajout de notre composant de dessin dans la fenetre
 		UI ui = new UI();
 		frame.add(ui);
-		Coup c = Brain.nextMove();
+		//Coup c = Brain.nextMove();
 		//Jeu.occupe(c.i, c.j);
 		//frame.addKeyListener(new EcouteurKey(j,ng));
 		// Un clic sur le bouton de fermeture clos l'application
