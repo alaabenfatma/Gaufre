@@ -13,6 +13,7 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Stack;
 
 /**
@@ -87,10 +88,25 @@ public class AppTest {
         }
         assertTrue(test);
     }
+    
+    /*
+        On réalise des tests avec des nombres aléatoires assez grands
+        pour voir si les fonctions sont robustes.
+    */
+    @Test
+    public void testinit_random(){
+        Random nbreAleatoire = new Random();
+        int longueur = nbreAleatoire.nextInt(1000);
+        int largeur = nbreAleatoire.nextInt(1000);
+        Jeu.init(longueur, largeur);
+    }
 
+    /*
+        test de la fonction isFree
+    */
 
     @Test
-    public void testisFree() {
+    public void testisFreeTrue() {
         Jeu.init();
         int x = 3;
         int y = 1;
@@ -101,7 +117,7 @@ public class AppTest {
     @Rule
     public ExpectedException thrownException = ExpectedException.none();
     @Test
-    public void testisFree2() throws Exception{
+    public void testisFree_xSuperieurLongueur() throws Exception{
         Jeu.init(); //longueur = 10
         int x = 50;
         int y = 1;
@@ -112,7 +128,7 @@ public class AppTest {
 
 
     @Test
-    public void testisFree3() throws Exception{
+    public void testisFree_ySuperieurLargeur() throws Exception{
         Jeu.init();
         int x = 3;
         int y = 50;
@@ -122,13 +138,24 @@ public class AppTest {
     }
 
     @Test
-    public void testisFree4(){
+    public void testisFree_occupe(){
         Jeu.init();
         int x = 5;
         int y = 5;
         Jeu.occupe(x, y);
         assertFalse(Jeu.isFree(x, y));
     }
+
+
+    @Test
+    public void testisFree_aleatoire(){
+        Jeu.init(1000 , 1000);
+        Random nbreAleatoire = new Random();
+        int x = nbreAleatoire.nextInt(1000);
+        int y = nbreAleatoire.nextInt(1000);
+        Jeu.isFree(x, y);
+    }
+
 
     @Test 
     public void testisFree_valeursNegatives_x() throws Exception {
@@ -150,8 +177,30 @@ public class AppTest {
         thrownException.expectMessage("x ou y est inférieur à 0");
         Jeu.isFree(x, y);
     }
-    
-    
+ 
+    /*
+        test de la fonction occupe
+    */
+
+    @Test
+    public void testoccupeTrue(){
+        Jeu.init();
+        Jeu.occupe(5, 5);
+    }
+
+
+    @Test
+    public void testoccupe_aleatoire(){
+        Random nbreAleatoire = new Random();
+        int longueur = nbreAleatoire.nextInt(1000);
+        int largeur = nbreAleatoire.nextInt(1000);
+        Jeu.init(longueur, largeur);
+        int x = nbreAleatoire.nextInt(longueur);
+        int y = nbreAleatoire.nextInt(largeur);
+        Jeu.occupe(x, y);
+    }
+
+
     @Test 
     public void testoccupe_2arguments_valeursNegatives_x() throws Exception {
         Jeu.init();
@@ -162,6 +211,7 @@ public class AppTest {
         Jeu.occupe(x, y);
     }
 
+
     @Test 
     public void testoccupe_2arguments_valeursNegatives_y() throws Exception {
         Jeu.init();
@@ -171,6 +221,7 @@ public class AppTest {
         thrownException.expectMessage("occupe : x ou y est inférieur à 0");
         Jeu.occupe(x, y);
     }
+
 
     @Test 
     public void testoccupe_3arguments_valeursNegatives_x() throws Exception {
@@ -194,6 +245,7 @@ public class AppTest {
         thrownException.expectMessage("occupe : x ou y est inférieur à 0");
         Jeu.occupe(map, x, y);
     }
+
 
     @Test 
     public void testoccupe_3arguments_map() throws Exception {
@@ -264,7 +316,7 @@ public class AppTest {
         Jeu.init(longueur, largeur);
         Jeu.occupe(5, 5);
         assertEquals(Jeu.remainingMoves(), 75);
-      }
+    }
 
 
     @Test
@@ -277,8 +329,8 @@ public class AppTest {
     }
 
     /*
-    A vérifier avec alaa la fonction gameOver dans Jeu.java ne marche
-    pas très bien
+        A vérifier avec alaa la fonction gameOver dans Jeu.java ne marche
+        pas très bien
     */
     @Test
     public void testgameOverTrue(){
@@ -294,6 +346,35 @@ public class AppTest {
         Jeu.occupe(5, 5);
         assertFalse(Jeu.gameOver(Jeu.terrain()));
     }
+    
+    /**
+    *   test des fonctions copyOfTerrain
+    */
+
+    @Test
+    public void testcopyOfTerrain_sansArguments(){
+        Jeu.init(Jeu.longueur(), Jeu.largeur());
+        boolean[][] cpy = Jeu.copyOfTerrain();
+
+        for (int i = 0; i < Jeu.longueur(); i++){
+            for (int j = 0; j < Jeu.largeur(); j++){
+                assertEquals(cpy[i][j], Jeu.terrain()[i][j]);
+            }
+        }
+    }
+
+
+    @Test
+    public void testcopyOfTerrain_avecArgument(){
+        Jeu.init(Jeu.longueur(), Jeu.largeur());
+        boolean[][] cpy = Jeu.copyOfTerrain(Jeu.terrain());
+
+        for (int i = 0; i < Jeu.longueur(); i++){
+            for (int j = 0; j < Jeu.largeur(); j++){
+                assertEquals(cpy[i][j], Jeu.terrain()[i][j]);
+            }
+        }
+    }
 
 
     @Test
@@ -305,37 +386,37 @@ public class AppTest {
         List<Coup> J2 = new ArrayList<Coup>();
         Jeu.init();
         Jeu.occupe(2, 1);
-        Jeu.occupe(1,5);
-        matrice=Jeu.terrain();
+        Jeu.occupe(1, 5);
+        matrice = Jeu.terrain();
         Jeu.init();
         
-        J1.add(new Coup(7,8));
-        J1.add(new Coup(3,7));
-        J1.add(new Coup(5,1));
-        J1.add(new Coup(1,5));
+        J1.add(new Coup(7, 8));
+        J1.add(new Coup(3, 7));
+        J1.add(new Coup(5, 1));
+        J1.add(new Coup(1, 5));
 
-        J2.add(new Coup(6,5));
-        J2.add(new Coup(7,3));
-        J2.add(new Coup(2,1));
+        J2.add(new Coup(6, 5));
+        J2.add(new Coup(7, 3));
+        J2.add(new Coup(2, 1));
         while(!J1.isEmpty() || !J2.isEmpty()){
-            if((J1.isEmpty() && Jeu.tour==Turn.Player1) || (J2.isEmpty() && Jeu.tour==Turn.Player2)){
+            if((J1.isEmpty() && Jeu.tour == Turn.Player1) || (J2.isEmpty() && Jeu.tour == Turn.Player2)){
                 break;
             }
-            if(Jeu.tour==Turn.Player1){
-                Backend.jouer(J1.get(0).i,J1.get(0).j);
+            if(Jeu.tour == Turn.Player1){
+                Backend.jouer(J1.get(0).i, J1.get(0).j);
                 J1.remove(0);
             }
             else{
-                Backend.jouer(J2.get(0).i,J2.get(0).j);
+                Backend.jouer(J2.get(0).i, J2.get(0).j);
                 J2.remove(0);
             }
         }
-        Boolean test=true;
-        boolean[][]gaufre=Jeu.terrain();
-        for(int j=0;j<Jeu.longueur();j++){
-            for(int i=0;i<Jeu.largeur();i++){
-                if(matrice[j][i]!=gaufre[j][i]){
-                    test=false;
+        Boolean test = true;
+        boolean[][] gaufre = Jeu.terrain();
+        for(int j = 0; j < Jeu.longueur(); j++){
+            for(int i = 0; i < Jeu.largeur(); i++){
+                if(matrice[j][i] != gaufre[j][i]){
+                    test = false;
                 }
             }
         }
