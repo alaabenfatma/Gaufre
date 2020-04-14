@@ -11,4 +11,7 @@ public class Coup {
     public  String toString(){
         return "("+i+","+j+")";
     }
+    public boolean compare(Coup A){
+        return (A.i==i) && (A.j==j);
+    }
 }

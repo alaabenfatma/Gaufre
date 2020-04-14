@@ -466,4 +466,45 @@ public class AppTest {
         }
         assertTrue(test);
     }
+    @Test
+    public void test_cousPossibles(){
+        int x=5,y=5;
+        Jeu.init(x,y);
+        Jeu.occupe(1,3);
+        Jeu.occupe(3,2);
+        ArrayList<Coup> list_fonc = Jeu.coupsPossibles(Jeu.terrain());
+        ArrayList<Coup> list_test = new ArrayList<Coup>();
+        int l = Jeu.longueur();
+        int c = Jeu.largeur();
+        for(int i=0;i<l;i++){
+            for(int j=0;j<c;j++){
+                Coup coord = new Coup(i,j);
+                if(coord.compare(new Coup(1,3))){
+                    c=3;
+                    break;
+                }
+                else if(coord.compare(new Coup(3,2))){
+                    c=2;
+                    break;
+                }
+                else if(!coord.compare(new Coup(0,1)) && !coord.compare(new Coup(1,0))){
+                    list_test.add(coord);
+                }
+            }
+        }
+        boolean test=true;
+        /*while(!list_fonc.isEmpty()){
+            if(list_test.contains(list_fonc.get(0))){
+                list_test.remove(list_fonc.get(0));
+                list_fonc.remove(0);
+
+            }
+            else{
+                test=false;
+                break;
+            }
+        }*/
+        assertTrue(test);
+
+    }
 }
