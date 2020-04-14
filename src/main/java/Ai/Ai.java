@@ -38,10 +38,12 @@ public class Ai {
      * (Jeu.isFree(i, j)) { i = r.nextInt(Jeu.longueur()); j =
      * r.nextInt(Jeu.largeur()); }
      * 
-     * //On analyse les coups gagnant ici if (!Jeu.isFree(0,1)){ //si la case juste
+     * //On analyse les coups gagnant ici 
+     * if (!Jeu.isFree(0,1)){ //si la case juste
      * en bas de la case empoisonné n'est pas isFree alors il ne reste que la ligne
      * de la case empoisonnée de isFree, on supprime toutes les case de la ligne
-     * sauf la case empoisonnée Backend.Backend.jouer(0,1);
+     * sauf la case empoisonnée 
+     * Backend.Backend.jouer(0,1);
      * Backend.Backend.jouer(1,0); return true; } if (!Jeu.isFree(1,0)){ //si la
      * case juste a droite de la case empoisonné n'est pas isFree alors il ne reste
      * que la colonne de la case empoisonnée de isFree, on supprime toutes les case

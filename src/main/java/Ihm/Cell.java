@@ -59,10 +59,20 @@ class cellMouseListener implements MouseListener {
             public void run() {
                 try {
                     Jeu._ui.playerBar.setText(Jeu.getPlayer());
-                    Thread.sleep(500);
-                    if (Jeu.mode_JEU == GameMode.PVA && Jeu.GameOver == false) {
+                    
+                    if (Jeu.mode_JEU == GameMode.PVA && Jeu.GameOver == false && Backend.GameLevel == Hard) {
+                        Thread.sleep(500);
                         coupCourant = Brain.nextMove();
                         Jeu.occupe(coupCourant.i, coupCourant.j);
+                    }
+                    if (Jeu.mode_JEU == GameMode.PVA && Jeu.GameOver == false && Backend.GameLevel == Medium) {
+                        Thread.sleep(2000);
+                        Ai.PlayC();
+
+                    }
+                    if (Jeu.mode_JEU == GameMode.PVA && Jeu.GameOver == false && Backend.GameLevel == Easy) {
+                        Thread.sleep(2000);
+                        Ai.Play();
                     }
                     Jeu._ui.playerBar.setText(Jeu.getPlayer());
                 } catch (InterruptedException v) {

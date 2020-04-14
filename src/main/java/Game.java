@@ -42,9 +42,9 @@ public class Game implements Runnable {
         ia_Slider.setPaintTicks(true);
        
         Hashtable<Integer, JLabel> levels = new Hashtable<Integer, JLabel>();
-        levels.put(0, new JLabel("Facile"));
-        levels.put(50, new JLabel("Normale"));
-        levels.put(100, new JLabel("Difficile"));
+        levels.put(0, new JLabel("Aleatoire"));
+        levels.put(50, new JLabel("Coup gagnant"));
+        levels.put(100, new JLabel("MiniMax"));
         ia_Slider.setLabelTable(levels);
         ia_Slider.setPaintLabels(true);
         JLabel diff = new JLabel("Niveau d'IA : ");
