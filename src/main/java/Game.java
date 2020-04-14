@@ -92,7 +92,7 @@ public class Game implements Runnable {
         panel.add(ia_Slider);
         frame.add(panel);
 
-        frame.setSize(250, 300);
+        frame.setSize(250, 270);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
