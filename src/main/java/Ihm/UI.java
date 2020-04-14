@@ -69,11 +69,11 @@ public class UI extends JComponent {
                         c.setSize(w, h);
                         this.add(c);
                     } else if (Jeu.terrain()[i][j] == false) {
-                        Cell c = new Cell(null, i, j, w, h);
-                        c.setLocation(x, y);
-                        c.setSize(w, h);
-                        this.add(c);
-
+                        JPanel p = new JPanel();
+                        p.setLocation(x, y);
+                        p.setSize(w,h);
+                        p.setBackground(Color.WHITE);
+                        this.add(p);
                     }
                     x += w;
 

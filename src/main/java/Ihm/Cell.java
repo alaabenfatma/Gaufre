@@ -49,10 +49,13 @@ class cellMouseListener implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
+        if (Jeu.tour != Turn.Player1 || !this._cell.isVisible())
+            return;
         int i = _cell.x;
         int j = _cell.y;
         System.out.printf("Mouse position : (%d,%d)\nGame position : (%d,%d)\n", e.getX(), e.getY(), i, j);
-        Jeu.occupe(i, j);
+        
+            Jeu.occupe(i, j);
         Thread ai = new Thread() {
             public void run() {
                 try {
