@@ -6,6 +6,7 @@ import org.junit.rules.ExpectedException;
 
 import Ai.Coup;
 import Backend.Backend;
+import Backend.GameMode;
 import Backend.Jeu;
 import Backend.Turn;
 
@@ -352,12 +353,28 @@ public class AppTest {
     */
 
     @Test
-    public void testcopyOfTerrain_sansArguments(){
+    public void testcopyOfTerrain_sansArgumentsTrue(){
         Jeu.init(Jeu.longueur(), Jeu.largeur());
         boolean[][] cpy = Jeu.copyOfTerrain();
 
         for (int i = 0; i < Jeu.longueur(); i++){
             for (int j = 0; j < Jeu.largeur(); j++){
+                assertEquals(cpy[i][j], Jeu.terrain()[i][j]);
+            }
+        }
+    }
+
+
+    @Test
+    public void testcopyOfTerrain_sansArgumentsAleatoire(){
+        Random nbreAleatoire = new Random();
+        int longueur = nbreAleatoire.nextInt(1000);
+        int largeur = nbreAleatoire.nextInt(1000);
+        Jeu.init(longueur, largeur);
+        boolean[][] cpy = Jeu.copyOfTerrain();
+
+        for (int i = 0; i < longueur; i++){
+            for (int j = 0; j < largeur; j++){
                 assertEquals(cpy[i][j], Jeu.terrain()[i][j]);
             }
         }
@@ -378,10 +395,37 @@ public class AppTest {
 
 
     @Test
+    public void testgetPlayerTrue(){
+        Jeu.tour = Turn.Player1;
+        assertEquals(Jeu.getPlayer(), "Player 1");
+        Jeu.tour = Turn.Player2;
+        Jeu.mode_JEU = GameMode.PVP;
+        assertEquals(Jeu.getPlayer(), "Player 2");
+        Jeu.mode_JEU = GameMode.PVA;
+        assertEquals(Jeu.getPlayer(), "AI");
+    }
+
+
+    @Test
+    public void testgetPlayerFalse(){
+        Jeu.tour = Turn.Player1;
+        assertNotEquals(Jeu.getPlayer(), "Player 2");
+        assertNotEquals(Jeu.getPlayer(), "AI");
+        Jeu.tour = Turn.Player2;
+        Jeu.mode_JEU = GameMode.PVP;
+        assertNotEquals(Jeu.getPlayer(), "Player 1");
+        assertNotEquals(Jeu.getPlayer(), "AI");
+        Jeu.mode_JEU = GameMode.PVA;
+        assertNotEquals(Jeu.getPlayer(), "Player 1");
+        assertNotEquals(Jeu.getPlayer(), "Player 2");
+    }
+
+
+    @Test
     public void test_fonctionnel_1(){
         Jeu.init();
         boolean[][] matrice;
-        matrice=Jeu.terrain();
+        matrice = Jeu.terrain();
         List<Coup> J1 = new ArrayList<Coup>();
         List<Coup> J2 = new ArrayList<Coup>();
         Jeu.init();

@@ -184,8 +184,8 @@ public class Jeu {
         }
         affiche();
         boolean[][] saved = history.pop();
-        for (int i = 0; i < largeur(); i++) {
-            for (int j = 0; j < longueur(); j++) {
+        for (int i = 0; i < longueur(); i++) {
+            for (int j = 0; j < largeur(); j++) {
                 gaufre[i][j] = saved[i][j];
             }
         }
