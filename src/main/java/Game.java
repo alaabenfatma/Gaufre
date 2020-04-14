@@ -14,18 +14,22 @@ public class Game implements Runnable {
 
     @Override
     public void run() {
-        JFrame frame = new JFrame("Gaufre");
+        JFrame frame = new JFrame("Start Menu");
         JPanel panel = new JPanel();
         JLabel jLabel1 = new JLabel();
         JLabel jLabel2 = new JLabel();
 
+        //panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setLayout(new GridLayout(8, 0));
+
         //Champs largeur/longueur
         jLabel1.setText("Entrez la largeur :");
-        panel.add(jLabel1);
+        jLabel1.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
         
         JTextField largeurField = new JTextField(1);
         largeurField.setPreferredSize(new Dimension(20, 20));
-        panel.add(largeurField);
+        
         largeurField.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
                 String getValue = largeurField.getText();
@@ -35,11 +39,10 @@ public class Game implements Runnable {
         });
 
         jLabel2.setText("Entrez la longueur :");
-        panel.add(jLabel2);
+        jLabel2.setAlignmentX(Component.CENTER_ALIGNMENT);
         
         JTextField longueurField = new JTextField();
         longueurField.setPreferredSize(new Dimension(20, 20));
-        panel.add(longueurField);
         longueurField.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
                 String getValue2 = longueurField.getText();
@@ -48,10 +51,10 @@ public class Game implements Runnable {
             }
         });
 
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         
         //Selection du mode de jeu
         JButton twoPlayers = new JButton("Player vs Player");
+        twoPlayers.setAlignmentX(Component.CENTER_ALIGNMENT);
         twoPlayers.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 get_dim();
@@ -62,6 +65,7 @@ public class Game implements Runnable {
         });
 
         JButton playerIA = new JButton("Player vs IA");
+        playerIA.setAlignmentX(Component.CENTER_ALIGNMENT);
         playerIA.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 get_dim();
@@ -71,28 +75,46 @@ public class Game implements Runnable {
             }
         });
 
-        // IA MODE SLIDE
-        JSlider ia_Slider = new JSlider(JSlider.HORIZONTAL, 0, 100, 10);
-        ia_Slider.setMinorTickSpacing(50);
-        ia_Slider.setMajorTickSpacing(50);
-        ia_Slider.setPaintTicks(true);
+        // IA MODE combo box
+        JLabel diffL = new JLabel("Niveau d'IA : ");
+        diffL.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        Hashtable<Integer, JLabel> levels = new Hashtable<Integer, JLabel>();
-        levels.put(0, new JLabel("Facile"));
-        levels.put(50, new JLabel("Normale"));
-        levels.put(100, new JLabel("Difficile"));
-        ia_Slider.setLabelTable(levels);
-        ia_Slider.setPaintLabels(true);
-        JLabel diff = new JLabel("Niveau d'IA : ");
-        // Set the label to be drawn
-        ia_Slider.setLabelTable(levels);
+        String[] iaStrings = { "Aleatoire", "Coup gagnant", "MiniMax"};
+        JComboBox ia_List = new JComboBox(iaStrings);
+        ia_List.setSelectedIndex(2);
+        ia_List.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JComboBox cb = (JComboBox)e.getSource();
+                String diff = (String)cb.getSelectedItem();
+                switch(diff){
+                    case "Aleatoire" :
+                        Jeu.mode_IA = GameLevel.Easy ;
+                        break;
+                    case "Coup gagnant" :
+                        Jeu.mode_IA = GameLevel.Medium ;
+                        break;
+                    case "MiniMax" :
+                        Jeu.mode_IA = GameLevel.Hard;
+                        break;
+                }
+            }
+        });
+
+
+        panel.add(jLabel1);
+        panel.add(largeurField);
+        panel.add(jLabel2);
+        panel.add(longueurField);
         panel.add(twoPlayers);
         panel.add(playerIA);
-        panel.add(diff);
-        panel.add(ia_Slider);
+        panel.add(diffL);
+        panel.add(ia_List);
         frame.add(panel);
 
-        frame.setSize(250, 270);
+
+
+
+        frame.setSize(300, 300);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -102,13 +124,12 @@ public class Game implements Runnable {
         frame.setLocation(x, y);
     }
 
-    private void get_dim(){
+    private void get_dim() {
         if (customLargeur != -1 && customLongueur != -1) {
             longueur = customLongueur;
             largeur = customLargeur;
-        }
-        else{
-            msgBox.MessageBox("Dimension par défaut 6x8","Dimension");
+        } else {
+            msgBox.MessageBox("Dimension par défaut 6x8", "Dimension");
         }
     }
 
