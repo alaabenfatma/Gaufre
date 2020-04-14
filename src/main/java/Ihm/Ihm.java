@@ -13,7 +13,7 @@ import Backend.Turn;
 public class Ihm implements Runnable {
     public void run() {
 		// Creation d'une fenetre
-		JFrame frame = new JFrame("Gauffre");
+		JFrame frame = new JFrame("Gaufre");
 		// Ajout de notre composant de dessin dans la fenetre
 		UI ui = new UI();
 		frame.add(ui);
