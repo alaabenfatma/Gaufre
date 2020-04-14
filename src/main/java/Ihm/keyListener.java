@@ -2,6 +2,7 @@ package Ihm;
 
 import javax.swing.*;
 
+import Backend.GameMode;
 import Backend.Jeu;
 import Backend.Turn;
 
@@ -20,6 +21,9 @@ public class keyListener implements KeyListener {
     public void keyPressed(KeyEvent e) {
         if (e.isControlDown()&& (e.getKeyCode() == KeyEvent.VK_Z)) {
             Jeu.CTRL_Z();
+            if(Jeu.mode_JEU== GameMode.PVA){
+                Jeu.CTRL_Z();
+            }
         }
 
     }
