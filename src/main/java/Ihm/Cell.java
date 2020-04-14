@@ -4,6 +4,8 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
+import java.util.concurrent.TimeUnit;
+
 import javax.swing.*;
 
 import Ai.Ai;
@@ -36,7 +38,7 @@ public class Cell extends JComponent {
     }
 }
 
- class cellMouseListener implements MouseListener {
+class cellMouseListener implements MouseListener {
     Cell _cell;
     Coup coupCourant = null;
     boolean firstMove = false;
@@ -50,12 +52,22 @@ public class Cell extends JComponent {
         int i = _cell.x;
         int j = _cell.y;
         System.out.printf("Mouse position : (%d,%d)\nGame position : (%d,%d)\n", e.getX(), e.getY(), i, j);
-        Jeu.occupe(i,j);
-        if (Jeu.mode_JEU == GameMode.PVA && Jeu.GameOver == false) {
-            coupCourant = Brain.nextMove();
-            Jeu.occupe(coupCourant.i, coupCourant.j);
-        }
-        System.out.println("AI is playing.");
+        Jeu.occupe(i, j);
+        Thread ai = new Thread() {
+            public void run() {
+                try {
+                    Thread.sleep(500);
+                    if (Jeu.mode_JEU == GameMode.PVA && Jeu.GameOver == false) {
+                        coupCourant = Brain.nextMove();
+                        Jeu.occupe(coupCourant.i, coupCourant.j);
+                    }
+                    System.out.println("AI is playing.");
+                } catch (InterruptedException v) {
+                    System.out.println(v);
+                }
+            }
+        };
+        ai.start();
     }
 
     @Override
@@ -72,7 +84,7 @@ public class Cell extends JComponent {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-       
+
     }
 
     @Override
