@@ -31,6 +31,7 @@ public class Game implements Runnable {
                 Jeu.init(6,8);
                 Jeu.mode_JEU = GameMode.PVA;
                 SwingUtilities.invokeLater(new Ihm());
+                Jeu.mode_IA = GameLevel.Hard;
             }
 
         });
