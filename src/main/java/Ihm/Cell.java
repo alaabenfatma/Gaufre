@@ -11,6 +11,9 @@ import javax.swing.*;
 import Ai.Ai;
 import Ai.Brain;
 import Ai.Coup;
+import Ai.Coupgagnant;
+import Ai.Easy;
+import Backend.GameLevel;
 import Backend.GameMode;
 import Backend.Jeu;
 import Backend.Turn;
@@ -60,19 +63,19 @@ class cellMouseListener implements MouseListener {
                 try {
                     Jeu._ui.playerBar.setText(Jeu.getPlayer());
                     
-                    if (Jeu.mode_JEU == GameMode.PVA && Jeu.GameOver == false && Backend.GameLevel == Hard) {
+                    if (Jeu.mode_JEU == GameMode.PVA && Jeu.GameOver == false && Jeu.mode_IA == GameLevel.Hard) {
                         Thread.sleep(500);
                         coupCourant = Brain.nextMove();
                         Jeu.occupe(coupCourant.i, coupCourant.j);
                     }
-                    if (Jeu.mode_JEU == GameMode.PVA && Jeu.GameOver == false && Backend.GameLevel == Medium) {
+                    if (Jeu.mode_JEU == GameMode.PVA && Jeu.GameOver == false && Jeu.mode_IA == GameLevel.Medium) {
                         Thread.sleep(2000);
-                        Ai.PlayC();
+                        Coupgagnant.PlayC();
 
                     }
-                    if (Jeu.mode_JEU == GameMode.PVA && Jeu.GameOver == false && Backend.GameLevel == Easy) {
+                    if (Jeu.mode_JEU == GameMode.PVA && Jeu.GameOver == false && Jeu.mode_IA == GameLevel.Easy) {
                         Thread.sleep(2000);
-                        Ai.Play();
+                        Easy.Play();
                     }
                     Jeu._ui.playerBar.setText(Jeu.getPlayer());
                 } catch (InterruptedException v) {

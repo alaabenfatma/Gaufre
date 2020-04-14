@@ -7,10 +7,10 @@ import Backend.Jeu;
 public class Coupgagnant {
 
     
+    private static Random r = new Random();
 
     public static void PlayC(){
         
-        private static Random r = new Random();
 
         int i = r.nextInt(Jeu.longueur());
         int j = r.nextInt(Jeu.largeur());
