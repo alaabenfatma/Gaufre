@@ -30,6 +30,8 @@ public class Ihm implements Runnable {
 		
         frame.setSize(500,500);
 		frame.addKeyListener(new keyListener());
+		
+        frame.add(Jeu._ui.playerBar, java.awt.BorderLayout.SOUTH);
         //frame.add(ui.player, BorderLayout.NORTH);
 		/*
 		if (maximized) {

@@ -27,7 +27,7 @@ public class Brain {
         minimax(Jeu.copyOfTerrain(), 5, Integer.MIN_VALUE, Integer.MAX_VALUE, true);
         return nextMove;
     }
-
+    
     public static int minimax(boolean[][] terrain, int depth, int alpha, int beta, boolean maximizing) {
 
         if (Jeu.gameOver(terrain)) {
@@ -41,7 +41,6 @@ public class Brain {
             int bestScore = Integer.MIN_VALUE;
             ArrayList<Coup> coups = Jeu.coupsPossibles(terrain);
             for (Coup coup : coups) {
-                Jeu.affiche(terrain);
                 boolean[][] xterrain = Jeu.copyOfTerrain(terrain);
                 xterrain = futureTerrain(xterrain, coup);
                 int score = minimax(xterrain, depth - 1, alpha, beta, false);
@@ -59,7 +58,6 @@ public class Brain {
             int bestScore = Integer.MAX_VALUE;
             ArrayList<Coup> coups = Jeu.coupsPossibles(terrain);
             for (Coup coup : coups) {
-                Jeu.affiche(terrain);
                 boolean[][] xterrain = Jeu.copyOfTerrain(terrain);
                 xterrain = futureTerrain(xterrain, coup);
                 int score = minimax(xterrain, depth - 1, alpha, beta, true);

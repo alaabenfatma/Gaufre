@@ -316,4 +316,16 @@ public class Jeu {
     public static Stack<boolean[][]> pile() {
         return Jeu.history;
     }
+    public static String getPlayer(){
+        if(Jeu.tour== Turn.Player1){
+            return "Player 1";
+        }
+        if(Jeu.tour == Turn.Player2 && mode_JEU == GameMode.PVA){
+            return "AI";
+        }
+        if(Jeu.tour == Turn.Player2 && mode_JEU == GameMode.PVP){
+            return "Player 2";
+        }
+        return "";
+    }
 }

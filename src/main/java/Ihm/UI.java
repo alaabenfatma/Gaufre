@@ -11,7 +11,7 @@ public class UI extends JComponent {
     Image gauffre;
     Image poison;
     public JLabel player = new JLabel("Player X");
-
+    public bar playerBar = new bar(Jeu.getPlayer());
     public UI() {
         try {
             InputStream img = UI.class.getResourceAsStream("gaufre.png");
@@ -39,7 +39,7 @@ public class UI extends JComponent {
     public void paintComponent(Graphics g) {
         Component[] components = getComponents();
         for (Component component : components) {
-            if (component instanceof Cell)
+            if (component instanceof Cell || component instanceof bar|| component instanceof JPanel)
                 this.remove(component);
         }
         Dimension d = this.getSize();
@@ -51,8 +51,6 @@ public class UI extends JComponent {
         int w = d.width / Jeu.largeur();
         int h = d.height / Jeu.longueur();
         cellSize = new Dimension(w, h);
-        System.out.println(h + " " + w);
-        Graphics2D drawable = (Graphics2D) g;
         try {
             for (int i = 0; i < Jeu.longueur(); i++) {
                 x = 0;
@@ -80,8 +78,7 @@ public class UI extends JComponent {
                 }
                 y += h;
             }
-            drawable.setColor(Color.black);
-            drawable.drawString(player.getText(), x - (w / 2), y);
+            
         } catch (Exception e) {
             // TODO: handle exception
         }
