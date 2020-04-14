@@ -34,16 +34,7 @@ public class Game implements Runnable {
             }
 
         });
-        JButton IA_IA = new JButton("IA vs IA");
-        IA_IA.addMouseListener(new MouseAdapter() {
-
-            public void mouseClicked(MouseEvent e) {
-                Jeu.init(5, 5);
-                Jeu.mode_JEU = GameMode.AVA;
-                SwingUtilities.invokeLater(new Ihm());
-            }
-
-        });
+     
         // IA MODE SLIDE
         JSlider ia_Slider = new JSlider( JSlider.HORIZONTAL,0,100,10);
         ia_Slider.setMinorTickSpacing(50);
@@ -53,7 +44,7 @@ public class Game implements Runnable {
         Hashtable<Integer, JLabel> levels = new Hashtable<Integer, JLabel>();
         levels.put(0, new JLabel("Facile"));
         levels.put(50, new JLabel("Normale"));
-        levels.put(100, new JLabel("Impossible"));
+        levels.put(100, new JLabel("Difficile"));
         ia_Slider.setLabelTable(levels);
         ia_Slider.setPaintLabels(true);
         JLabel diff = new JLabel("Niveau d'IA : ");
@@ -61,7 +52,6 @@ public class Game implements Runnable {
         ia_Slider.setLabelTable(levels);
         panel.add(twoPlayers);
         panel.add(playerIA);
-        panel.add(IA_IA);
         panel.add(diff);
         panel.add(ia_Slider);
         frame.add(panel);
