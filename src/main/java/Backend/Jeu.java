@@ -12,6 +12,7 @@ public class Jeu {
     private static int largeur;
     public static Turn tour; // faux: player1, vrai: player2
     private static Stack<boolean[][]> history = new Stack<boolean[][]>();
+    private static Stack<boolean[][]> Save = new Stack<boolean[][]>();
     public static UI _ui;
     public static GameLevel mode_IA = GameLevel.Easy;
     public static GameMode mode_JEU = GameMode.PVP;
@@ -170,7 +171,7 @@ public class Jeu {
                 }
             }
         }
-        affiche();
+        //affiche();
 
         if (_ui != null) {
             _ui.repaint();
@@ -183,7 +184,37 @@ public class Jeu {
             return;
         }
         affiche();
+        Save.add(copyOfTerrain());
         boolean[][] saved = history.pop();
+        for (int i = 0; i < longueur(); i++) {
+            for (int j = 0; j < largeur(); j++) {
+                gaufre[i][j] = saved[i][j];
+            }
+        }
+        wentbackintime = true;
+        if (tour == Turn.Player1) {
+            tour = Turn.Player2;
+            if (_ui != null) {
+                _ui.player.setText("Player 2");
+            }
+        } else {
+            tour = Turn.Player1;
+            if (_ui != null) {
+                _ui.player.setText("Player 1");
+            }
+        }
+        if (_ui != null) {
+            _ui.repaint();
+        }
+    }
+    public static void CTRL_Y() {
+        if (Save.size() == 0) {
+            System.out.println("Restauration du terrain atteint.\n");
+            return;
+        }
+        affiche();
+        history.add(copyOfTerrain());
+        boolean[][] saved = Save.pop();
         for (int i = 0; i < longueur(); i++) {
             for (int j = 0; j < largeur(); j++) {
                 gaufre[i][j] = saved[i][j];
