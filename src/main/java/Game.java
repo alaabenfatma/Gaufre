@@ -129,7 +129,7 @@ public class Game implements Runnable {
             longueur = customLongueur;
             largeur = customLargeur;
         } else {
-            msgBox.MessageBox("Dimension par défaut 6x8", "Dimension");
+            msgBox.MessageBox("Dimension par defaut 6x8", "Dimension");
         }
     }
 

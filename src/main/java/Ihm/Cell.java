@@ -24,6 +24,7 @@ import java.awt.event.*;
 public class Cell extends JComponent {
     Image _img;
     int x, y, w, h;
+    static boolean ai_playing = true;
 
     public Cell(Image img, int _x, int _y, int _w, int _h) {
         this._img = img;
@@ -52,12 +53,17 @@ class cellMouseListener implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
+
+        
         if ( !this._cell.isVisible())
             return;
         int i = _cell.x;
         int j = _cell.y;
-        System.out.printf("Mouse position : (%d,%d)\nGame position : (%d,%d)\n", e.getX(), e.getY(), i, j);
-        Jeu.occupe(i, j);
+        if (Cell.ai_playing){
+            System.out.printf("Mouse position : (%d,%d)\nGame position : (%d,%d)\n", e.getX(), e.getY(), i, j);
+            Jeu.occupe(i, j);
+            Cell.ai_playing = false;
+        }        
         Thread ai = new Thread() {
             public void run() {
                 try {
@@ -81,6 +87,7 @@ class cellMouseListener implements MouseListener {
                 } catch (InterruptedException v) {
                     System.out.println(v);
                 }
+                Cell.ai_playing = true;
             }
         };
         ai.start();
