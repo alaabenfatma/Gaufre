@@ -5,6 +5,7 @@ import Ihm.Ihm;
 import Ihm.msgBox;
 
 import java.awt.event.*;
+import java.io.File;
 import java.util.Hashtable;
 import java.awt.*;
 
@@ -19,17 +20,16 @@ public class Game implements Runnable {
         JLabel jLabel1 = new JLabel();
         JLabel jLabel2 = new JLabel();
 
-        //panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        // panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setLayout(new GridLayout(8, 0));
 
-        //Champs largeur/longueur
+        // Champs largeur/longueur
         jLabel1.setText("Entrez la largeur :");
         jLabel1.setAlignmentX(Component.CENTER_ALIGNMENT);
-        
-        
+
         JTextField largeurField = new JTextField(1);
         largeurField.setPreferredSize(new Dimension(20, 20));
-        
+
         largeurField.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
                 String getValue = largeurField.getText();
@@ -40,7 +40,7 @@ public class Game implements Runnable {
 
         jLabel2.setText("Entrez la longueur :");
         jLabel2.setAlignmentX(Component.CENTER_ALIGNMENT);
-        
+
         JTextField longueurField = new JTextField();
         longueurField.setPreferredSize(new Dimension(20, 20));
         longueurField.addActionListener(new ActionListener() {
@@ -51,12 +51,18 @@ public class Game implements Runnable {
             }
         });
 
-        
-        //Selection du mode de jeu
+        // Selection du mode de jeu
         JButton twoPlayers = new JButton("Player vs Player");
         twoPlayers.setAlignmentX(Component.CENTER_ALIGNMENT);
         twoPlayers.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
+                // todo
+                File f = new File("en_cours");
+                if (f.exists()) {
+                    int dialogButton = JOptionPane.YES_NO_OPTION;
+                    JOptionPane.showConfirmDialog(null, "Recharger la partie en cours?", "Partie en cours",dialogButton);
+
+                }
                 get_dim();
                 Jeu.init(longueur, largeur);
                 Jeu.mode_JEU = GameMode.PVP;
@@ -79,27 +85,26 @@ public class Game implements Runnable {
         JLabel diffL = new JLabel("Niveau d'IA : ");
         diffL.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        String[] iaStrings = { "Aleatoire", "Coup gagnant", "MiniMax"};
+        String[] iaStrings = { "Aleatoire", "Coup gagnant", "MiniMax" };
         JComboBox ia_List = new JComboBox(iaStrings);
         ia_List.setSelectedIndex(2);
         ia_List.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                JComboBox cb = (JComboBox)e.getSource();
-                String diff = (String)cb.getSelectedItem();
-                switch(diff){
-                    case "Aleatoire" :
-                        Jeu.mode_IA = GameLevel.Easy ;
+                JComboBox cb = (JComboBox) e.getSource();
+                String diff = (String) cb.getSelectedItem();
+                switch (diff) {
+                    case "Aleatoire":
+                        Jeu.mode_IA = GameLevel.Easy;
                         break;
-                    case "Coup gagnant" :
-                        Jeu.mode_IA = GameLevel.Medium ;
+                    case "Coup gagnant":
+                        Jeu.mode_IA = GameLevel.Medium;
                         break;
-                    case "MiniMax" :
+                    case "MiniMax":
                         Jeu.mode_IA = GameLevel.Hard;
                         break;
                 }
             }
         });
-
 
         panel.add(jLabel1);
         panel.add(largeurField);
@@ -110,9 +115,6 @@ public class Game implements Runnable {
         panel.add(diffL);
         panel.add(ia_List);
         frame.add(panel);
-
-
-
 
         frame.setSize(300, 300);
         frame.setLocationRelativeTo(null);

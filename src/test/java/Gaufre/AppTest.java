@@ -270,7 +270,9 @@ public class AppTest {
         assertEquals(Turn.Player2, Jeu.tour);
     }
 
-
+    /**
+     * Test du ctrl_z
+     */
     @Test
     public void test_CTRL_Z(){
         final Stack<boolean[][]> Save;
@@ -309,7 +311,9 @@ public class AppTest {
 
     }
 
-
+    /**
+     * Test du ctrl_z
+     */
     @Test 
     public void test_CTRL_Y(){
         final Stack<boolean[][]> Save;
@@ -333,7 +337,7 @@ public class AppTest {
         assertEquals(joueur, Jeu.tour());
     }
 
-    
+
     @Test
     public void test_joueur_2_CTRL_Y(){
         Turn joueur;
@@ -360,7 +364,9 @@ public class AppTest {
         assertEquals(joueur, Jeu.tour());
     }
 
-
+    /**
+     * Test de la fonction remaingMoves()
+     */
     @Test
     public void testremainingMovesTrue(){
         int longueur = 10;
@@ -444,6 +450,9 @@ public class AppTest {
         }
     }
 
+    /**
+     * Test de la fonction getPlayer()
+     */
 
     @Test
     public void testgetPlayerTrue(){
@@ -471,7 +480,9 @@ public class AppTest {
         assertNotEquals(Jeu.getPlayer(), "Player 2");
     }
 
-
+    /**
+    * Test de la fonction joue  
+    */
     @Test
     public void test_fonctionnel_1(){
         Jeu.init();

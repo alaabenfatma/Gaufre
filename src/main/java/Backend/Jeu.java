@@ -85,14 +85,16 @@ public class Jeu {
                 if (Jeu.tour() == Turn.Player2) {
                     if (mode_JEU == GameMode.PVA) {
                         msgBox.MessageBox("You won against the AI.", "Gameover");
+
                     } else {
-                        msgBox.MessageBox("Player 1 a perdu", "Gameover");
+                        msgBox.MessageBox("Player 2 a perdu", "Gameover");
                     }
+
                 } else {
                     if (mode_JEU == GameMode.PVA) {
                         msgBox.MessageBox("You lost against the AI", "Gameover");
                     } else {
-                        msgBox.MessageBox("Player 2 a perdu", "Gameover");
+                        msgBox.MessageBox("Player 1 a perdu", "Gameover");
                     }
                 }
                 GameOver = true;
@@ -148,12 +150,12 @@ public class Jeu {
                     if (mode_JEU == GameMode.PVA)
                         msgBox.MessageBox("You won against the AI.", "Gameover");
                     else
-                        msgBox.MessageBox("Player 1 a perdu", "Gameover");
+                        msgBox.MessageBox("Player 2 a perdu", "Gameover");
                 } else {
                     if (mode_JEU == GameMode.PVA)
                         msgBox.MessageBox("You lost against the AI", "Gameover");
                     else
-                        msgBox.MessageBox("Player 2 a perdu", "Gameover");
+                        msgBox.MessageBox("Player 1 a perdu", "Gameover");
                 }
                 GameOver = true;
                 File f = new File("en_cours");
@@ -195,10 +197,10 @@ public class Jeu {
             file.createNewFile();
             writer = new BufferedWriter(new FileWriter(file));
             if (tour == Turn.Player1) {
-                writer.write("1,"+longueur+","+largeur);
+                writer.write("1," + longueur + "," + largeur);
                 writer.newLine();
             } else {
-                writer.write("2,"+longueur+","+largeur);
+                writer.write("2," + longueur + "," + largeur);
                 writer.newLine();
             }
             for (int i = 0; i < longueur; i++) {
