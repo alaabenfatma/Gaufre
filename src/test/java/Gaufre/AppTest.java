@@ -467,7 +467,7 @@ public class AppTest {
         assertTrue(test);
     }
     @Test
-    public void test_cousPossibles(){
+    public void test_coupsPossibles(){
         int x=5,y=5;
         Jeu.init(x,y);
         Jeu.occupe(1,3);
