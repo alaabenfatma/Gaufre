@@ -287,10 +287,10 @@ public class AppTest {
     public void test_joueur_1_CTRL_Z(){
         Turn joueur;
         Jeu.init();
-        joueur=Jeu.tour();
-        Jeu.occupe(5,5);
+        joueur = Jeu.tour();
+        Jeu.occupe(5, 5);
         Jeu.CTRL_Z();
-        assertEquals(joueur,Jeu.tour());
+        assertEquals(joueur, Jeu.tour());
 
     }
 
@@ -307,6 +307,57 @@ public class AppTest {
         Jeu.CTRL_Z();
         assertEquals(joueur, Jeu.tour());
 
+    }
+
+
+    @Test 
+    public void test_CTRL_Y(){
+        final Stack<boolean[][]> Save;
+        Jeu.init();
+        Jeu.occupe(5, 5);
+        Save = Jeu.pile_save();
+        Jeu.occupe(2, 2);
+        Jeu.CTRL_Y();
+        assertEquals(Save, Jeu.pile_save());
+    }
+
+
+    @Test 
+    public void test_joueur_1_CTRL_Y(){
+        Turn joueur;
+        Jeu.init();
+        Jeu.occupe(5, 5);
+        joueur = Jeu.tour();
+        Jeu.CTRL_Z();
+        Jeu.CTRL_Y();
+        assertEquals(joueur, Jeu.tour());
+    }
+
+    
+    @Test
+    public void test_joueur_2_CTRL_Y(){
+        Turn joueur;
+        Jeu.init();
+        Jeu.occupe(5, 5);
+        joueur = Jeu.tour();
+        Jeu.occupe(4, 5);
+        Jeu.occupe(4, 3);
+        Jeu.CTRL_Z();
+        Jeu.CTRL_Z();
+        Jeu.CTRL_Y();
+        Jeu.CTRL_Y();
+        assertEquals(joueur, Jeu.tour());
+    }
+
+
+    @Test 
+    public void test_joueur_CTRL_Y(){
+        Turn joueur;
+        Jeu.init();
+        joueur = Jeu.tour();
+        Jeu.occupe(5, 5);
+        Jeu.CTRL_Y();
+        assertEquals(joueur, Jeu.tour());
     }
 
 
@@ -466,59 +517,73 @@ public class AppTest {
         }
         assertTrue(test);
     }
+
+
     @Test
     public void test_coupsPossibles(){
-        int x=5,y=5;
-        Jeu.init(x,y);
-        Jeu.occupe(1,3);
-        Jeu.occupe(3,2);
+        int x = 5, y = 5;
+        Jeu.init(x, y);
+        Jeu.occupe(1, 3);
+        Jeu.occupe(3, 2);
         ArrayList<Coup> list_fonc = Jeu.coupsPossibles(Jeu.terrain());
         ArrayList<Coup> list_test = new ArrayList<Coup>();
         int l = Jeu.longueur();
         int c = Jeu.largeur();
-        for(int i=0;i<l;i++){
-            for(int j=0;j<c;j++){
-                Coup coord = new Coup(i,j);
-                if(coord.compare(new Coup(1,3))){
-                    c=3;
+        for(int i = 0; i < l; i++){
+            
+            for(int j = 0; j < c; j++){
+                Coup coord = new Coup(i, j);
+                
+                if(coord.compare(new Coup(1, 3))){
+                    c = 3;
                     break;
                 }
-                else if(coord.compare(new Coup(3,2))){
-                    c=2;
+                
+                else if(coord.compare(new Coup(3, 2))){
+                    c = 2;
                     break;
                 }
-                else if(!coord.compare(new Coup(0,1)) && !coord.compare(new Coup(1,0))){
+                
+                else if(!coord.compare(new Coup(0, 1)) && !coord.compare(new Coup(1, 0))){
                     list_test.add(coord);
                 }
             }
         }
-        boolean test=true;
+        boolean test = true;
         
+        if(list_test.size() != list_fonc.size()){
+            test = false;
         
-        if(list_test.size()!=list_fonc.size()){test=false;}
-        else{
-            while(list_test.size()!=0){
-                boolean est_contenu=false;
-                int indice=0;
-                for(int i=0;i<list_test.size();i++){
+        } else {
+
+            while(list_test.size() != 0){
+                boolean est_contenu = false;
+                int indice = 0;
+                
+                for(int i = 0; i < list_test.size(); i++){
+                    
                     if(list_test.get(i).compare(list_fonc.get(0))){
-                        est_contenu=true;
-                        indice=i;
+                        est_contenu = true;
+                        indice = i;
                         break;
                     }
                 }
+                
                 if(est_contenu){
-                    est_contenu=false;
+                    est_contenu = false;
                     list_test.remove(indice);
                     list_fonc.remove(0);
-                }
-                else{
-                    test=false;
+                
+                } else {
+                    test = false;
                     break;
                 }
             }
         }
         assertTrue(test);
-
     }
 }
+
+/**
+ * ajouter coups aléatoires et coups qui sont faux
+ */

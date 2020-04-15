@@ -344,9 +344,17 @@ public class Jeu {
         return cpy;
     }
 
+    
     public static Stack<boolean[][]> pile() {
         return Jeu.history;
     }
+
+
+    public static Stack<boolean[][]> pile_save(){
+        return Jeu.Save;
+    }
+
+
     public static String getPlayer(){
         if(Jeu.tour== Turn.Player1){
             return "Player 1";
