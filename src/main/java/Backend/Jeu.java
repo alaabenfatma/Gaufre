@@ -1,5 +1,8 @@
 package Backend;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.util.*;
 
 import Ai.Coup;
@@ -169,12 +172,43 @@ public class Jeu {
                     if (_ui != null)
                         _ui.player.setText("Player 1");
                 }
+                CTRL_S();
             }
         }
-        //affiche();
+        // affiche();
 
         if (_ui != null) {
             _ui.repaint();
+        }
+    }
+
+    public static void CTRL_S() {
+        BufferedWriter writer;
+        try {
+            File file = new File("en_cours");
+            file.createNewFile();
+            writer = new BufferedWriter(new FileWriter(file));
+            if (tour == Turn.Player1) {
+                writer.write("1");
+                writer.newLine();
+            } else {
+                writer.write("2");
+                writer.newLine();
+            }
+            for (int i = 0; i < longueur; i++) {
+                for (int j = 0; j < largeur; j++) {
+                    if (Jeu.isFree(i, j)) {
+                        writer.write("+");
+                    } else {
+                        writer.write("-");
+                    }
+                }
+                writer.newLine();
+            }
+            writer.flush();
+            writer.close();
+        } catch (Exception e) {
+            System.err.println(e);
         }
     }
 
@@ -207,6 +241,7 @@ public class Jeu {
             _ui.repaint();
         }
     }
+
     public static void CTRL_Y() {
         if (Save.size() == 0) {
             System.out.println("Restauration du terrain atteint.\n");
@@ -344,25 +379,22 @@ public class Jeu {
         return cpy;
     }
 
-    
     public static Stack<boolean[][]> pile() {
         return Jeu.history;
     }
 
-
-    public static Stack<boolean[][]> pile_save(){
+    public static Stack<boolean[][]> pile_save() {
         return Jeu.Save;
     }
 
-
-    public static String getPlayer(){
-        if(Jeu.tour== Turn.Player1){
+    public static String getPlayer() {
+        if (Jeu.tour == Turn.Player1) {
             return "Player 1";
         }
-        if(Jeu.tour == Turn.Player2 && mode_JEU == GameMode.PVA){
+        if (Jeu.tour == Turn.Player2 && mode_JEU == GameMode.PVA) {
             return "AI";
         }
-        if(Jeu.tour == Turn.Player2 && mode_JEU == GameMode.PVP){
+        if (Jeu.tour == Turn.Player2 && mode_JEU == GameMode.PVP) {
             return "Player 2";
         }
         return "";
