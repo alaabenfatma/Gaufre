@@ -2,12 +2,14 @@ package Backend;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.util.*;
 
 import Ai.Coup;
 import Ihm.UI;
 import Ihm.msgBox;
+import java.util.Scanner;
 
 public class Jeu {
     private static boolean[][] gaufre; // le terrain
@@ -47,6 +49,42 @@ public class Jeu {
             for (int j = 0; j < largeur; j++) {
                 gaufre[i][j] = true;
             }
+        }
+    }
+
+    public static void init(String filename) {
+        GameOver = false;
+        File f = new File(filename);
+        Scanner myInput;
+        String entry = new String();
+        String[] entry_split;
+        try {
+            myInput = new Scanner(f);
+            entry = myInput.nextLine();
+            entry_split = entry.split(",");
+            if (entry_split[0].equals("1")) {
+                tour = Turn.Player1;
+            } else {
+                tour = Turn.Player2;
+            }
+            longueur = Integer.parseInt(entry_split[1]);
+            largeur = Integer.parseInt(entry_split[2]);
+            gaufre = new boolean[longueur][largeur];
+            
+            for (int i = 0; i < longueur; i++) {
+                entry = myInput.nextLine();
+                for (int j = 0; j < largeur; j++) {
+                    if (entry.charAt(j) == '+') {
+                        gaufre[i][j] = true;
+                    }else{
+                        gaufre[i][j] = false;
+                    }
+                }
+            }
+
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
     }
 

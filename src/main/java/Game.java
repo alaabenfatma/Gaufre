@@ -6,6 +6,7 @@ import Ihm.msgBox;
 
 import java.awt.event.*;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Hashtable;
 import java.awt.*;
 
@@ -43,8 +44,11 @@ public class Game implements Runnable {
 
         JTextField longueurField = new JTextField();
         longueurField.setPreferredSize(new Dimension(20, 20));
-        longueurField.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent ae) {
+        longueurField.addFocusListener(new FocusListener() {
+            public void focusGained(FocusEvent e) {
+            }
+
+            public void focusLost(FocusEvent e) {
                 String getValue2 = longueurField.getText();
                 customLongueur = Integer.parseInt(getValue2);
                 System.out.println("Longueur : " + customLongueur);
@@ -56,17 +60,28 @@ public class Game implements Runnable {
         twoPlayers.setAlignmentX(Component.CENTER_ALIGNMENT);
         twoPlayers.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                // todo
                 File f = new File("en_cours");
                 if (f.exists()) {
                     int dialogButton = JOptionPane.YES_NO_OPTION;
-                    JOptionPane.showConfirmDialog(null, "Recharger la partie en cours?", "Partie en cours",dialogButton);
-
+                    int dialogResult = JOptionPane.showConfirmDialog(null,
+                            "Une partie existe déjà, voulez-vous la continuer?", "Partie en cours", dialogButton);
+                    if (dialogResult == JOptionPane.YES_OPTION) {
+                        Jeu.init("en_cours");
+                        Jeu.mode_JEU = GameMode.PVP;
+                        SwingUtilities.invokeLater(new Ihm());
+                    } else {
+                        f.delete();
+                        get_dim();
+                        Jeu.init(longueur, largeur);
+                        Jeu.mode_JEU = GameMode.PVP;
+                        SwingUtilities.invokeLater(new Ihm());
+                    }
+                } else {
+                    get_dim();
+                    Jeu.init(longueur, largeur);
+                    Jeu.mode_JEU = GameMode.PVP;
+                    SwingUtilities.invokeLater(new Ihm());
                 }
-                get_dim();
-                Jeu.init(longueur, largeur);
-                Jeu.mode_JEU = GameMode.PVP;
-                SwingUtilities.invokeLater(new Ihm());
             }
         });
 
@@ -74,10 +89,28 @@ public class Game implements Runnable {
         playerIA.setAlignmentX(Component.CENTER_ALIGNMENT);
         playerIA.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                get_dim();
-                Jeu.init(longueur, largeur);
-                Jeu.mode_JEU = GameMode.PVA;
-                SwingUtilities.invokeLater(new Ihm());
+                File f = new File("en_cours");
+                if (f.exists()) {
+                    int dialogButton = JOptionPane.YES_NO_OPTION;
+                    int dialogResult = JOptionPane.showConfirmDialog(null,
+                            "Une partie existe déjà, voulez-vous la continuer?", "Partie en cours", dialogButton);
+                    if (dialogResult == JOptionPane.YES_OPTION) {
+                        Jeu.init("en_cours");
+                        Jeu.mode_JEU = GameMode.PVA;
+                        SwingUtilities.invokeLater(new Ihm());
+                    } else {
+                        f.delete();
+                        get_dim();
+                        Jeu.init(longueur, largeur);
+                        Jeu.mode_JEU = GameMode.PVA;
+                        SwingUtilities.invokeLater(new Ihm());
+                    }
+                } else {
+                    get_dim();
+                    Jeu.init(longueur, largeur);
+                    Jeu.mode_JEU = GameMode.PVA;
+                    SwingUtilities.invokeLater(new Ihm());
+                }
             }
         });
 
@@ -87,7 +120,7 @@ public class Game implements Runnable {
 
         String[] iaStrings = { "Aleatoire", "Coup gagnant", "MiniMax" };
         JComboBox ia_List = new JComboBox(iaStrings);
-        ia_List.setSelectedIndex(2);
+        ia_List.setSelectedIndex(0);
         ia_List.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JComboBox cb = (JComboBox) e.getSource();
