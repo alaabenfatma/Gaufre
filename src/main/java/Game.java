@@ -35,8 +35,12 @@ public class Game implements Runnable {
 
             public void focusLost(FocusEvent e) {
                 String getValue = largeurField.getText();
-                customLargeur = Integer.parseInt(getValue);
-                System.out.println("Largeur : " + customLargeur);
+                try {
+                    customLargeur = Integer.parseInt(getValue);
+                    System.out.println("Largeur : " + customLargeur);
+                } catch (Exception e1) {
+                }
+
             }
         });
 
@@ -51,8 +55,12 @@ public class Game implements Runnable {
 
             public void focusLost(FocusEvent e) {
                 String getValue2 = longueurField.getText();
-                customLongueur = Integer.parseInt(getValue2);
-                System.out.println("Longueur : " + customLongueur);
+                try {
+                    customLongueur = Integer.parseInt(getValue2);
+                    System.out.println("Longueur : " + customLongueur);
+                } catch (Exception e1) {
+                }
+
             }
         });
 
@@ -129,7 +137,7 @@ public class Game implements Runnable {
             longueur = customLongueur;
             largeur = customLargeur;
         } else {
-            msgBox.MessageBox("Dimension par defaut 6x8", "Dimension");
+            msgBox.MessageBox("Dimension par defaut 6x8.", "Dimension");
         }
     }
 
