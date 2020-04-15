@@ -19,7 +19,7 @@ public class Backend {
         String [] ligne_split;
         int x_input;
         int y_input;
-        Jeu.affiche();
+        //Jeu.affiche();
         while (!perdu) {
             // on lis un coup
             if (Jeu.tour()==Turn.Player1) {
@@ -56,7 +56,7 @@ public class Backend {
     }
 
     public static void jouer(int x, int y) {
-        Jeu.affiche();
+        //Jeu.affiche();
         if ((x == 0) && (x == 0)) {
              // on a perdu
              if (Jeu.tour() == Turn.Player2) {

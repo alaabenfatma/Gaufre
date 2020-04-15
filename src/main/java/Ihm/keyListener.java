@@ -25,7 +25,12 @@ public class keyListener implements KeyListener {
                 Jeu.CTRL_Z();
             }
         }
-
+        if (e.isControlDown()&& (e.getKeyCode() == KeyEvent.VK_Y)) {
+            Jeu.CTRL_Y();
+            if(Jeu.mode_JEU== GameMode.PVA){
+                Jeu.CTRL_Y();
+            }
+        }
     }
 
     @Override
