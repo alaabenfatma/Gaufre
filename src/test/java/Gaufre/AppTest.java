@@ -493,17 +493,31 @@ public class AppTest {
             }
         }
         boolean test=true;
-        /*while(!list_fonc.isEmpty()){
-            if(list_test.contains(list_fonc.get(0))){
-                list_test.remove(list_fonc.get(0));
-                list_fonc.remove(0);
-
+        
+        
+        if(list_test.size()!=list_fonc.size()){test=false;}
+        else{
+            while(list_test.size()!=0){
+                boolean est_contenu=false;
+                int indice=0;
+                for(int i=0;i<list_test.size();i++){
+                    if(list_test.get(i).compare(list_fonc.get(0))){
+                        est_contenu=true;
+                        indice=i;
+                        break;
+                    }
+                }
+                if(est_contenu){
+                    est_contenu=false;
+                    list_test.remove(indice);
+                    list_fonc.remove(0);
+                }
+                else{
+                    test=false;
+                    break;
+                }
             }
-            else{
-                test=false;
-                break;
-            }
-        }*/
+        }
         assertTrue(test);
 
     }
