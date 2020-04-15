@@ -83,17 +83,21 @@ public class Jeu {
             if ((x == 0) && (y == 0)) {
                 // on a perdu
                 if (Jeu.tour() == Turn.Player2) {
-                    if (mode_JEU == GameMode.PVA)
+                    if (mode_JEU == GameMode.PVA) {
                         msgBox.MessageBox("You won against the AI.", "Gameover");
-                    else
+                    } else {
                         msgBox.MessageBox("Player 1 a perdu", "Gameover");
+                    }
                 } else {
-                    if (mode_JEU == GameMode.PVA)
+                    if (mode_JEU == GameMode.PVA) {
                         msgBox.MessageBox("You lost against the AI", "Gameover");
-                    else
+                    } else {
                         msgBox.MessageBox("Player 2 a perdu", "Gameover");
+                    }
                 }
                 GameOver = true;
+                File f = new File("en_cours");
+                f.delete();
                 return;
             }
             if (isFree(x, y)) {
@@ -152,6 +156,8 @@ public class Jeu {
                         msgBox.MessageBox("Player 2 a perdu", "Gameover");
                 }
                 GameOver = true;
+                File f = new File("en_cours");
+                f.delete();
                 return;
             }
             history.add(saved);
@@ -189,10 +195,10 @@ public class Jeu {
             file.createNewFile();
             writer = new BufferedWriter(new FileWriter(file));
             if (tour == Turn.Player1) {
-                writer.write("1");
+                writer.write("1,"+longueur+","+largeur);
                 writer.newLine();
             } else {
-                writer.write("2");
+                writer.write("2,"+longueur+","+largeur);
                 writer.newLine();
             }
             for (int i = 0; i < longueur; i++) {
