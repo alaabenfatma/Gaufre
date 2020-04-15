@@ -83,12 +83,12 @@ public class Jeu {
                     if (mode_JEU == GameMode.PVA)
                         msgBox.MessageBox("You won against the AI.", "Gameover");
                     else
-                        msgBox.MessageBox("Player 1 a perdu", "Gameover");
+                        msgBox.MessageBox("Player 2 a perdu", "Gameover");
                 } else {
                     if (mode_JEU == GameMode.PVA)
                         msgBox.MessageBox("You lost against the AI", "Gameover");
                     else
-                        msgBox.MessageBox("Player 2 a perdu", "Gameover");
+                        msgBox.MessageBox("Player 1 a perdu", "Gameover");
                 }
                 GameOver = true;
                 return;
@@ -141,12 +141,12 @@ public class Jeu {
                     if (mode_JEU == GameMode.PVA)
                         msgBox.MessageBox("You won against the AI.", "Gameover");
                     else
-                        msgBox.MessageBox("Player 1 a perdu", "Gameover");
+                        msgBox.MessageBox("Player 2 a perdu", "Gameover");
                 } else {
                     if (mode_JEU == GameMode.PVA)
                         msgBox.MessageBox("You lost against the AI", "Gameover");
                     else
-                        msgBox.MessageBox("Player 2 a perdu", "Gameover");
+                        msgBox.MessageBox("Player 1 a perdu", "Gameover");
                 }
                 GameOver = true;
                 return;
