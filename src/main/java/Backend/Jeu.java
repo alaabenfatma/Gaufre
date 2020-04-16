@@ -24,21 +24,12 @@ public class Jeu {
     public static boolean GameOver = false;
 
     public static void init() {
-        GameOver = false;
-        longueur = 10;
-        largeur = 10;
-        tour = Turn.Player1;
-        gaufre = new boolean[longueur][largeur];
-
-        // initialise toutes les cases par true (non occupée)
-        for (int i = 0; i < longueur; i++) {
-            for (int j = 0; j < largeur; j++) {
-                gaufre[i][j] = true;
-            }
-        }
+        init(5,5);
     }
 
     public static void init(int _longueur, int _largeur) {
+        history.clear();
+        Save.clear();
         GameOver = false;
         longueur = _longueur;
         largeur = _largeur;
@@ -320,16 +311,7 @@ public class Jeu {
 
     // affiche la gaufre
     public static void affiche() {
-        for (int i = 0; i < longueur; i++) {
-            for (int j = 0; j < largeur; j++) {
-                if (Jeu.isFree(i, j)) {
-                    System.out.print("-");
-                } else {
-                    System.out.print(" ");
-                }
-            }
-            System.out.println("");
-        }
+        affiche(terrain());
     }
 
     // affiche la gaufre
@@ -347,15 +329,7 @@ public class Jeu {
     }
 
     public static int remainingMoves() {
-        int c = 0;
-        for (int i = 0; i < longueur; i++) {
-            for (int j = 0; j < largeur; j++) {
-                if (gaufre[i][j] == true) {
-                    c++;
-                }
-            }
-        }
-        return c;
+        return remainingMoves(terrain());
     }
 
     public static int remainingMoves(boolean[][] map) {
@@ -406,13 +380,7 @@ public class Jeu {
     }
 
     public static boolean[][] copyOfTerrain() {
-        boolean[][] cpy = new boolean[longueur()][largeur()];
-        for (int i = 0; i < longueur(); i++) {
-            for (int j = 0; j < largeur(); j++) {
-                cpy[i][j] = gaufre[i][j];
-            }
-        }
-        return cpy;
+        return copyOfTerrain(terrain());
     }
 
     public static boolean[][] copyOfTerrain(boolean[][] map) {
@@ -445,4 +413,5 @@ public class Jeu {
         }
         return "";
     }
+    public static boolean canPlay = true;
 }
