@@ -312,7 +312,7 @@ public class AppTest {
     }
 
     /**
-     * Test du ctrl_z
+     * Test du ctrl_y
      */
     @Test 
     public void test_CTRL_Y(){
@@ -353,16 +353,6 @@ public class AppTest {
         assertEquals(joueur, Jeu.tour());
     }
 
-
-    @Test 
-    public void test_joueur_CTRL_Y(){
-        Turn joueur;
-        Jeu.init();
-        joueur = Jeu.tour();
-        Jeu.occupe(5, 5);
-        Jeu.CTRL_Y();
-        assertEquals(joueur, Jeu.tour());
-    }
 
     /**
      * Test de la fonction remaingMoves()

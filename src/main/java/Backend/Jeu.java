@@ -24,7 +24,7 @@ public class Jeu {
     public static boolean GameOver = false;
 
     public static void init() {
-        init(5,5);
+        init(10, 10);
     }
 
     public static void init(int _longueur, int _largeur) {
