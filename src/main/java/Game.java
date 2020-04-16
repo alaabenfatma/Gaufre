@@ -31,11 +31,13 @@ public class Game implements Runnable {
         JTextField largeurField = new JTextField(1);
         largeurField.setPreferredSize(new Dimension(20, 20));
 
-        largeurField.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent ae) {
-                String getValue = largeurField.getText();
+        largeurField.addFocusListener(new FocusListener() {
+            public void focusGained(FocusEvent e) {
+            }
+            public void focusLost(FocusEvent e) {
+                String getValue2 = largeurField.getText();
                 try {
-                    customLargeur = Integer.parseInt(getValue);
+                    customLargeur = Integer.parseInt(getValue2);
                     System.out.println("Largeur : " + customLargeur);
                 } catch (Exception e1) {
                 }
