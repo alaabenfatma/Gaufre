@@ -10,6 +10,10 @@ import Ai.Coup;
 import Ihm.UI;
 import Ihm.msgBox;
 import java.util.Scanner;
+
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+
 import Patterns.Observable;
 
 public class Jeu extends Observable {
@@ -62,13 +66,13 @@ public class Jeu extends Observable {
             longueur = Integer.parseInt(entry_split[1]);
             largeur = Integer.parseInt(entry_split[2]);
             gaufre = new boolean[longueur][largeur];
-            
+
             for (int i = 0; i < longueur; i++) {
                 entry = myInput.nextLine();
                 for (int j = 0; j < largeur; j++) {
                     if (entry.charAt(j) == '+') {
                         gaufre[i][j] = true;
-                    }else{
+                    } else {
                         gaufre[i][j] = false;
                     }
                 }
@@ -191,6 +195,9 @@ public class Jeu extends Observable {
                 GameOver = true;
                 File f = new File("en_cours");
                 f.delete();
+                JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(_ui);
+                topFrame.setVisible(false);
+                topFrame.dispose();
                 return;
             }
             history.add(saved);
@@ -416,8 +423,6 @@ public class Jeu extends Observable {
         return history.size() != 0;
     }
 
-
-
     public static String getPlayer() {
         if (Jeu.tour == Turn.Player1) {
             return "Player 1";
@@ -430,5 +435,6 @@ public class Jeu extends Observable {
         }
         return "";
     }
+
     public static boolean canPlay = true;
 }
