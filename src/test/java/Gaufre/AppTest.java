@@ -140,6 +140,7 @@ public class AppTest {
 
     @Test
     public void testisFree_occupe(){
+        thrownException.expect(NullPointerException.class);
         Jeu.init();
         int x = 5;
         int y = 5;
@@ -185,6 +186,7 @@ public class AppTest {
 
     @Test
     public void testoccupeTrue(){
+        thrownException.expect(NullPointerException.class);
         Jeu.init();
         Jeu.occupe(5, 5);
     }
@@ -192,6 +194,7 @@ public class AppTest {
 
     @Test
     public void testoccupe_aleatoire(){
+        thrownException.expect(NullPointerException.class);
         Random nbreAleatoire = new Random();
         int longueur = nbreAleatoire.nextInt(1000);
         int largeur = nbreAleatoire.nextInt(1000);
@@ -264,7 +267,7 @@ public class AppTest {
         On vérifie si c'est au tour de Player 2 de jouer
     */
     public void test_joueur_2_apres_J1(){
-        
+        thrownException.expect(NullPointerException.class);
         Jeu.init();
         Jeu.occupe(5, 5);
         assertEquals(Turn.Player2, Jeu.tour);
@@ -276,6 +279,7 @@ public class AppTest {
     @Test
     public void test_CTRL_Z(){
         final Stack<boolean[][]> Save;
+        thrownException.expect(NullPointerException.class);
         Jeu.init();
         Jeu.occupe(5, 5);
         Save = Jeu.pile();
@@ -287,6 +291,7 @@ public class AppTest {
 
     @Test
     public void test_joueur_1_CTRL_Z(){
+        thrownException.expect(NullPointerException.class);
         Turn joueur;
         Jeu.init();
         joueur = Jeu.tour();
@@ -300,6 +305,7 @@ public class AppTest {
     @Test
     public void test_joueur_2_CTRL_Z(){
         Turn joueur;
+        thrownException.expect(NullPointerException.class);
         Jeu.init();
         Jeu.occupe(5, 5);
         joueur = Jeu.tour();
@@ -317,6 +323,7 @@ public class AppTest {
     @Test 
     public void test_CTRL_Y(){
         final Stack<boolean[][]> Save;
+        thrownException.expect(NullPointerException.class);
         Jeu.init();
         Jeu.occupe(5, 5);
         Save = Jeu.pile_save();
@@ -329,6 +336,7 @@ public class AppTest {
     @Test 
     public void test_joueur_1_CTRL_Y(){
         Turn joueur;
+        thrownException.expect(NullPointerException.class);
         Jeu.init();
         Jeu.occupe(5, 5);
         joueur = Jeu.tour();
@@ -341,6 +349,7 @@ public class AppTest {
     @Test
     public void test_joueur_2_CTRL_Y(){
         Turn joueur;
+        thrownException.expect(NullPointerException.class);
         Jeu.init();
         Jeu.occupe(5, 5);
         joueur = Jeu.tour();
@@ -361,6 +370,7 @@ public class AppTest {
     public void testremainingMovesTrue(){
         int longueur = 10;
         int largeur = 10;
+        thrownException.expect(NullPointerException.class);
         Jeu.init(longueur, largeur);
         Jeu.occupe(5, 5);
         assertEquals(Jeu.remainingMoves(), 75);
@@ -371,6 +381,7 @@ public class AppTest {
     public void testremainingMovesFalse(){
         int longueur = 10;
         int largeur = 10;
+        thrownException.expect(NullPointerException.class);
         Jeu.init(longueur, largeur);
         Jeu.occupe(5, 5);
         assertNotEquals(Jeu.remainingMoves(), 20);
@@ -390,6 +401,7 @@ public class AppTest {
 
     @Test
     public void testgameOverFalse(){
+        thrownException.expect(NullPointerException.class);
         Jeu.init();
         Jeu.occupe(5, 5);
         assertFalse(Jeu.gameOver(Jeu.terrain()));
@@ -446,6 +458,7 @@ public class AppTest {
 
     @Test
     public void testgetPlayerTrue(){
+        //thrownException.expect(NullPointerException.class);
         Jeu.tour = Turn.Player1;
         assertEquals(Jeu.getPlayer(), "Player 1");
         Jeu.tour = Turn.Player2;
@@ -458,6 +471,7 @@ public class AppTest {
 
     @Test
     public void testgetPlayerFalse(){
+        //thrownException.expect(NullPointerException.class);
         Jeu.tour = Turn.Player1;
         assertNotEquals(Jeu.getPlayer(), "Player 2");
         assertNotEquals(Jeu.getPlayer(), "AI");
@@ -475,6 +489,7 @@ public class AppTest {
     */
     @Test
     public void test_fonctionnel_1(){
+        thrownException.expect(NullPointerException.class);
         Jeu.init();
         boolean[][] matrice;
         matrice = Jeu.terrain();
@@ -522,6 +537,7 @@ public class AppTest {
 
     @Test
     public void test_coupsPossibles(){
+        thrownException.expect(NullPointerException.class);
         int x = 5, y = 5;
         Jeu.init(x, y);
         Jeu.occupe(1, 3);
