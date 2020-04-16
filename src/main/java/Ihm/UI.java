@@ -1,18 +1,22 @@
 package Ihm;
 
 import Backend.Jeu;
+import Patterns.Observateur;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
 
-public class UI extends JComponent {
+public class UI extends JComponent implements Observateur  {
     Image gauffre;
     Image poison;
+    Jeu j;
     public JLabel player = new JLabel("Player X");
     public bar playerBar = new bar(Jeu.getPlayer());
-    public UI() {
+    public UI(Jeu jeu) {
+        j = jeu;
+        j.ajouteObservateur(this);
         try {
             InputStream img = UI.class.getResourceAsStream("gaufre.png");
             gauffre = ImageIO.read(img);
@@ -82,6 +86,12 @@ public class UI extends JComponent {
         } catch (Exception e) {
             // TODO: handle exception
         }
+
+    }
+
+    @Override
+    public void miseAJour() {
+        // TODO Auto-generated method stub
 
     }
 

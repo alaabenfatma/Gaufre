@@ -70,6 +70,7 @@ public class Game implements Runnable {
         twoPlayers.setAlignmentX(Component.CENTER_ALIGNMENT);
         twoPlayers.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
+                Jeu j = new Jeu();
                 File f = new File("en_cours");
                 if (f.exists()) {
                     int dialogButton = JOptionPane.YES_NO_OPTION;
@@ -78,19 +79,19 @@ public class Game implements Runnable {
                     if (dialogResult == JOptionPane.YES_OPTION) {
                         Jeu.init("en_cours");
                         Jeu.mode_JEU = GameMode.PVP;
-                        SwingUtilities.invokeLater(new Ihm());
+                        SwingUtilities.invokeLater(new Ihm(j));
                     } else {
                         f.delete();
                         get_dim();
                         Jeu.init(longueur, largeur);
                         Jeu.mode_JEU = GameMode.PVP;
-                        SwingUtilities.invokeLater(new Ihm());
+                        SwingUtilities.invokeLater(new Ihm(j));
                     }
                 } else {
                     get_dim();
                     Jeu.init(longueur, largeur);
                     Jeu.mode_JEU = GameMode.PVP;
-                    SwingUtilities.invokeLater(new Ihm());
+                    SwingUtilities.invokeLater(new Ihm(j));
                 }
             }
         });
@@ -98,6 +99,7 @@ public class Game implements Runnable {
         JButton playerIA = new JButton("Player vs IA");
         playerIA.setAlignmentX(Component.CENTER_ALIGNMENT);
         playerIA.addMouseListener(new MouseAdapter() {
+            Jeu j = new Jeu();
             public void mouseClicked(MouseEvent e) {
                 File f = new File("en_cours");
                 if (f.exists()) {
@@ -107,19 +109,19 @@ public class Game implements Runnable {
                     if (dialogResult == JOptionPane.YES_OPTION) {
                         Jeu.init("en_cours");
                         Jeu.mode_JEU = GameMode.PVA;
-                        SwingUtilities.invokeLater(new Ihm());
+                        SwingUtilities.invokeLater(new Ihm(j));
                     } else {
                         f.delete();
                         get_dim();
                         Jeu.init(longueur, largeur);
                         Jeu.mode_JEU = GameMode.PVA;
-                        SwingUtilities.invokeLater(new Ihm());
+                        SwingUtilities.invokeLater(new Ihm(j));
                     }
                 } else {
                     get_dim();
                     Jeu.init(longueur, largeur);
                     Jeu.mode_JEU = GameMode.PVA;
-                    SwingUtilities.invokeLater(new Ihm());
+                    SwingUtilities.invokeLater(new Ihm(j));
                 }
             }
         });

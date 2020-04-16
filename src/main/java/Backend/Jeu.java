@@ -10,8 +10,9 @@ import Ai.Coup;
 import Ihm.UI;
 import Ihm.msgBox;
 import java.util.Scanner;
+import Patterns.Observable;
 
-public class Jeu {
+public class Jeu extends Observable {
     private static boolean[][] gaufre; // le terrain
     private static int longueur;
     private static int largeur;
@@ -151,6 +152,7 @@ public class Jeu {
         }
         if (_ui != null) {
             _ui.repaint();
+            metAJour();
         }
     }
 
@@ -192,6 +194,7 @@ public class Jeu {
                 return;
             }
             history.add(saved);
+            metAJour();
 
             if (isFree(x, y)) {
                 for (int i = x; i < longueur(); i++) {
@@ -216,6 +219,8 @@ public class Jeu {
 
         if (_ui != null) {
             _ui.repaint();
+            metAJour();
+
         }
     }
 
@@ -276,6 +281,7 @@ public class Jeu {
         }
         if (_ui != null) {
             _ui.repaint();
+            metAJour();
         }
     }
 
@@ -306,6 +312,7 @@ public class Jeu {
         }
         if (_ui != null) {
             _ui.repaint();
+            metAJour();
         }
     }
 
@@ -400,6 +407,16 @@ public class Jeu {
     public static Stack<boolean[][]> pile_save() {
         return Jeu.Save;
     }
+
+    public boolean peutRefaire() {
+        return Save.size() != 0;
+    }
+
+    public boolean peutAnnuler() {
+        return history.size() != 0;
+    }
+
+
 
     public static String getPlayer() {
         if (Jeu.tour == Turn.Player1) {
