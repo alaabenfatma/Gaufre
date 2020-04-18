@@ -18,10 +18,12 @@ public class UI extends JComponent implements Observateur  {
         j = jeu;
         j.ajouteObservateur(this);
         try {
-            InputStream img = UI.class.getResourceAsStream("gaufre.png");
-            gauffre = ImageIO.read(img);
-            img = UI.class.getResourceAsStream("poison.png");
-            poison = ImageIO.read(img);
+
+            ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+            InputStream g = classloader.getResourceAsStream("gaufre.png");
+            InputStream p = classloader.getResourceAsStream("poison.png");
+            gauffre = ImageIO.read(g);
+            poison = ImageIO.read(p);
             Jeu._ui = this;
         } catch (IOException e) {
             System.out.println(e.toString());
